@@ -1,131 +1,154 @@
-// Mobile Menu
+/* =====================================
+   DR. SHOLEH NEMATI
+   Main JavaScript
+===================================== */
 
-const menuToggle = document.getElementById("menuToggle");
-const navMenu = document.getElementById("navMenu");
+// منوی موبایل
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
 
-menuToggle.addEventListener("click", function () {
+if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
 
-    navMenu.classList.toggle("active");
-
-});
-
-
-// Close Mobile Menu After Clicking
-
-const navLinks = document.querySelectorAll(".nav a");
-
-navLinks.forEach(function (link) {
-
-    link.addEventListener("click", function () {
-
-        navMenu.classList.remove("active");
-
+        const isOpen = navLinks.classList.contains('active');
+        menuToggle.setAttribute('aria-expanded', isOpen);
     });
 
-});
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+}
 
+// تغییر هدر هنگام اسکرول
+const header = document.querySelector('.header');
 
-// Appointment Minimum Date
+function handleHeaderScroll() {
+    if (!header) return;
 
-const dateInput = document.getElementById("date");
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+}
 
-const today = new Date();
+window.addEventListener('scroll', handleHeaderScroll);
+handleHeaderScroll();
 
-const year = today.getFullYear();
-const month = String(today.getMonth() + 1).padStart(2, "0");
-const day = String(today.getDate()).padStart(2, "0");
+// نمایش نرم بخش‌ها هنگام ورود به صفحه
+const revealElements = document.querySelectorAll(
+    '.about-content, .about-decoration, .service-card, .section-heading, .comparison, .appointment-form, .appointment-info'
+);
 
-dateInput.min = `${year}-${month}-${day}`;
+if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.12
+    });
 
+    revealElements.forEach(element => {
+        element.classList.add('reveal');
+        observer.observe(element);
+    });
+}
 
-// Appointment Form
+// فرم درخواست نوبت
+const appointmentForm = document.querySelector('.appointment-form');
+const formMessage = document.querySelector('#formMessage');
 
-const appointmentForm = document.getElementById("appointmentForm");
+if (appointmentForm) {
+    appointmentForm.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-const formMessage = document.getElementById("formMessage");
+        const name = document.querySelector('#name')?.value.trim();
+        const phone = document.querySelector('#phone')?.value.trim();
+        const service = document.querySelector('#service')?.value;
+        const date = document.querySelector('#date')?.value;
+        const message = document.querySelector('#message')?.value.trim();
 
+        if (!name || !phone || !service || !date) {
+            showFormMessage('لطفاً فیلدهای ضروری را کامل کنید.', false);
+            return;
+        }
 
-appointmentForm.addEventListener("submit", function (event) {
+        const phonePattern = /^[0-9۰-۹٠-٩+\-\s]{8,20}$/;
 
-    event.preventDefault();
+        if (!phonePattern.test(phone)) {
+            showFormMessage('لطفاً شماره تماس را بررسی کنید.', false);
+            return;
+        }
 
-    const name = document.getElementById("patientName").value.trim();
+        const appointment = {
+            id: Date.now(),
+            name,
+            phone,
+            service,
+            date,
+            message,
+            createdAt: new Date().toISOString()
+        };
 
-    const phone = document.getElementById("patientPhone").value.trim();
+        try {
+            const storageKey = 'puredentAppointmentRequests';
+            const oldAppointments = JSON.parse(
+                localStorage.getItem(storageKey) || '[]'
+            );
 
-    const service = document.getElementById("service").value;
+            oldAppointments.push(appointment);
 
-    const date = document.getElementById("date").value;
+            localStorage.setItem(
+                storageKey,
+                JSON.stringify(oldAppointments)
+            );
 
-    const time = document.getElementById("time").value;
+            showFormMessage(
+                'درخواست شما در این مرورگر ذخیره شد. برای ثبت قطعی نوبت باید با مطب هماهنگ شود.',
+                true
+            );
 
-    const message = document.getElementById("message").value.trim();
+            appointmentForm.reset();
 
+        } catch (error) {
+            showFormMessage(
+                'ذخیره درخواست انجام نشد. لطفاً دوباره تلاش کنید.',
+                false
+            );
+        }
+    });
+}
 
-    const appointment = {
+function showFormMessage(message, success) {
+    if (!formMessage) return;
 
-        name: name,
+    formMessage.textContent = message;
+    formMessage.style.color = success ? '#477a55' : '#a34c43';
+}
 
-        phone: phone,
+// جلوگیری از انتخاب تاریخ گذشته
+const dateInput = document.querySelector('#date');
 
-        service: service,
+if (dateInput) {
+    const today = new Date();
+    const localDate = new Date(
+        today.getTime() - today.getTimezoneOffset() * 60000
+    ).toISOString().split('T')[0];
 
-        date: date,
+    dateInput.min = localDate;
+}
 
-        time: time,
+// سال جاری در فوتر
+const yearElement = document.querySelector('#currentYear');
 
-        message: message,
-
-        createdAt: new Date().toISOString()
-
-    };
-
-
-    let requests = JSON.parse(
-
-        localStorage.getItem("puredentAppointmentRequests") || "[]"
-
-    );
-
-
-    requests.push(appointment);
-
-
-    localStorage.setItem(
-
-        "puredentAppointmentRequests",
-
-        JSON.stringify(requests)
-
-    );
-
-
-    formMessage.textContent =
-        "اطلاعات در همین مرورگر ذخیره شد؛ این درخواست هنوز به مطب ارسال نشده است.";
-
-
-    appointmentForm.reset();
-
-    dateInput.min = `${year}-${month}-${day}`;
-
-});
-
-
-// Before And After Slider
-
-const comparisonRange = document.getElementById("comparisonRange");
-
-const comparisonAfter = document.querySelector(".comparison-after");
-
-const comparisonDivider = document.getElementById("comparisonDivider");
-
-
-comparisonRange.addEventListener("input", function () {
-
-    const value = this.value;
-
-    comparisonAfter.style.clipPath = `inset(0 0 0 ${value}%)`;
-
-    comparisonDivider.style.right = `${100 - value}%`;
-
-});
+if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+}

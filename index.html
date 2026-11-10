@@ -1,165 +1,563 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="PureDent - Premium Dental Care Experience">
+    <title>دکتر شوله نعمتی | مطب دندان‌پزشکی</title>
 
-    <title>PureDent | Premium Dental Experience</title>
+    <meta name="description"
+        content="وب‌سایت مطب دندان‌پزشکی دکتر شوله نعمتی؛ آشنایی با خدمات و ثبت درخواست نوبت.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <div class="page-loader"></div>
+    <!-- Header -->
 
     <header class="header">
-        <div class="container header-inner">
+
+        <div class="container nav-container">
 
             <a href="#" class="logo">
-                PURE<span>DENT</span>
-                <small>PREMIUM DENTAL CARE</small>
+                <span class="logo-icon">✳</span>
+
+                <div>
+                    <strong>دکتر شوله نعمتی</strong>
+                    <small>مطب دندان‌پزشکی</small>
+                </div>
             </a>
 
-            <nav class="navigation">
-                <a href="#home">Home</a>
-                <a href="#about">About Us</a>
-                <a href="#services">Treatments</a>
-                <a href="#doctors">Our Specialists</a>
-                <a href="#contact">Contact</a>
-            </nav>
-
-            <a href="#appointment" class="header-btn">
-                Book Appointment <span>↗</span>
-            </a>
-
-            <button class="menu-toggle" aria-label="Open menu">
-                <span></span>
-                <span></span>
+            <button class="menu-toggle" id="menuToggle">
+                ☰
             </button>
 
+            <nav class="nav" id="navMenu">
+
+                <a href="#home">صفحه اصلی</a>
+                <a href="#about">درباره پزشک</a>
+                <a href="#services">خدمات</a>
+                <a href="#results">نمونه ترمیم</a>
+                <a href="#appointment">درخواست نوبت</a>
+
+            </nav>
+
+            <a href="#appointment" class="nav-button">
+                دریافت نوبت
+            </a>
+
         </div>
+
     </header>
+
+
+    <!-- Hero -->
 
     <main>
 
         <section class="hero" id="home">
 
-            <div class="hero-content container">
+            <div class="container hero-content">
 
-                <span class="eyebrow">
-                    THE ART OF PREMIUM DENTISTRY
-                </span>
+                <div class="hero-text">
 
-                <h1>
-                    A Beautiful Smile<br>
-                    Begins With <em>Care.</em>
-                </h1>
+                    <span class="eyebrow">
+                        مراقبت حرفه‌ای از لبخند شما
+                    </span>
 
-                <p>
-                    Discover a new standard of dental excellence,
-                    where advanced technology meets personalized care.
-                </p>
+                    <h1>
+                        لبخندی زیبا،
+                        <br>
+                        با اطمینان و آرامش
+                    </h1>
 
-                <div class="hero-actions">
-                    <a href="#appointment" class="primary-btn">
-                        Discover Your Smile ↗
-                    </a>
+                    <p>
+                        سلامت دهان و دندان، شروع یک لبخند زیباست.
+                        در مطب دکتر شوله نعمتی، تلاش می‌کنیم تجربه‌ای
+                        آرام و حرفه‌ای از خدمات دندان‌پزشکی برای شما فراهم کنیم.
+                    </p>
 
-                    <a href="#about" class="text-btn">
-                        Explore Our Clinic →
-                    </a>
+                    <div class="hero-actions">
+
+                        <a href="#appointment" class="primary-button">
+                            درخواست نوبت
+                        </a>
+
+                        <a href="#services" class="secondary-button">
+                            مشاهده خدمات
+                        </a>
+
+                    </div>
+
+                    <div class="hero-note">
+                        <span>✦</span>
+                        توجه به سلامت و زیبایی لبخند شما
+                    </div>
+
+                </div>
+
+
+                <div class="hero-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=1000&q=85"
+                        alt="محیط دندان‌پزشکی">
+
+                    <div class="image-card">
+                        <span>✦</span>
+                        <div>
+                            <strong>لبخند سالم</strong>
+                            <small>از مراقبت تا زیبایی</small>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
 
-            <div class="hero-bottom container">
-                <span>SCROLL TO EXPLORE ↓</span>
-                <span>EST. 2026 — PREMIUM DENTAL CARE</span>
+        </section>
+
+
+        <!-- About -->
+
+        <section class="about section-padding" id="about">
+
+            <div class="container about-grid">
+
+                <div class="about-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=900&q=85"
+                        alt="محیط مطب دندان‌پزشکی">
+
+                </div>
+
+                <div class="about-text">
+
+                    <span class="eyebrow">درباره مطب</span>
+
+                    <h2>
+                        مراقبت از لبخند،
+                        <br>
+                        با توجه به جزئیات
+                    </h2>
+
+                    <p>
+                        در مطب دکتر شوله نعمتی، هدف ارائه خدمات
+                        دندان‌پزشکی با توجه به نیاز هر مراجعه‌کننده است.
+                    </p>
+
+                    <p>
+                        انتخاب روش درمان پس از معاینه و بررسی شرایط
+                        دهان و دندان انجام می‌شود تا مناسب‌ترین مسیر
+                        درمانی انتخاب شود.
+                    </p>
+
+                    <a href="#appointment" class="text-link">
+                        درخواست مشاوره
+                        <span>←</span>
+                    </a>
+
+                </div>
+
             </div>
 
         </section>
 
-        <section class="intro container" id="about">
-            <span class="eyebrow">WELCOME TO PUREDENT</span>
 
-            <h2>
-                Dentistry, thoughtfully<br>
-                <em>reimagined.</em>
-            </h2>
+        <!-- Services -->
 
-            <p>
-                We combine modern dental technology, expert care
-                and a refined patient experience to help you
-                achieve a healthier, more confident smile.
-            </p>
-        </section>
+        <section class="services section-padding" id="services">
 
-        <section class="services container" id="services">
-            <span class="eyebrow">WHAT WE OFFER</span>
-            <h2>Our <em>Treatments</em></h2>
+            <div class="container">
 
-            <div class="service-grid">
+                <div class="section-heading">
 
-                <article class="service-card">
-                    <span>01</span>
-                    <h3>Cosmetic Dentistry</h3>
-                    <p>Enhancing smiles with precision and artistry.</p>
-                    <a href="#appointment">Explore Treatment ↗</a>
-                </article>
+                    <span class="eyebrow">خدمات دندان‌پزشکی</span>
 
-                <article class="service-card">
-                    <span>02</span>
-                    <h3>Dental Implants</h3>
-                    <p>Advanced solutions for confident smiles.</p>
-                    <a href="#appointment">Explore Treatment ↗</a>
-                </article>
+                    <h2>خدمات ارائه‌شده در مطب</h2>
 
-                <article class="service-card">
-                    <span>03</span>
-                    <h3>Teeth Whitening</h3>
-                    <p>A brighter smile with professional care.</p>
-                    <a href="#appointment">Explore Treatment ↗</a>
-                </article>
+                    <p>
+                        انتخاب خدمات درمانی بر اساس معاینه و نیاز هر فرد
+                    </p>
+
+                </div>
+
+
+                <div class="services-grid">
+
+                    <div class="service-card">
+
+                        <span class="service-icon">✧</span>
+
+                        <h3>دندان‌پزشکی زیبایی</h3>
+
+                        <p>
+                            خدمات مرتبط با بهبود ظاهر لبخند و زیبایی دندان‌ها.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">✦</span>
+
+                        <h3>ایمپلنت دندان</h3>
+
+                        <p>
+                            بررسی و ارائه راهکارهای جایگزینی دندان از دست‌رفته.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">◇</span>
+
+                        <h3>ترمیم دندان</h3>
+
+                        <p>
+                            ترمیم پوسیدگی‌ها و بازسازی ساختار آسیب‌دیده دندان.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">✺</span>
+
+                        <h3>درمان ریشه</h3>
+
+                        <p>
+                            بررسی و درمان مشکلات مربوط به پالپ و ریشه دندان.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">✧</span>
+
+                        <h3>جرم‌گیری و مراقبت</h3>
+
+                        <p>
+                            مراقبت‌های پیشگیرانه برای حفظ سلامت دهان و دندان.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">♡</span>
+
+                        <h3>مشاوره دندان‌پزشکی</h3>
+
+                        <p>
+                            بررسی شرایط دهان و دندان و انتخاب مسیر درمان مناسب.
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
+
         </section>
 
-        <section class="doctors container" id="doctors">
-            <span class="eyebrow">MEET OUR TEAM</span>
-            <h2>Care led by <em>experts.</em></h2>
+
+        <!-- Before After -->
+
+        <section class="results section-padding" id="results">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">آشنایی با ترمیم دندان</span>
+
+                    <h2>قبل و بعد از ترمیم</h2>
+
+                    <p>
+                        برای مشاهده تفاوت، نوار وسط تصویر را حرکت دهید.
+                    </p>
+
+                </div>
+
+
+                <div class="comparison">
+
+                    <div class="comparison-before">
+
+                        <svg viewBox="0 0 500 320">
+
+                            <rect width="500" height="320" fill="#e8ddd0"/>
+
+                            <path d="M170 65 C125 90 130 180 165 230 C190 275 230 260 250 235 C275 270 315 275 340 230 C375 180 375 90 330 65 C295 40 275 65 250 85 C225 65 205 40 170 65Z"
+                                fill="#f8f0df" stroke="#c8b89f" stroke-width="5"/>
+
+                            <path d="M215 100 L250 85 L285 110 L270 165 L230 175Z"
+                                fill="#8a6550"/>
+
+                            <path d="M230 175 L250 85 L270 165Z"
+                                fill="#b17c5d"/>
+
+                        </svg>
+
+                    </div>
+
+
+                    <div class="comparison-after">
+
+                        <svg viewBox="0 0 500 320">
+
+                            <rect width="500" height="320" fill="#e8ddd0"/>
+
+                            <path d="M170 65 C125 90 130 180 165 230 C190 275 230 260 250 235 C275 270 315 275 340 230 C375 180 375 90 330 65 C295 40 275 65 250 85 C225 65 205 40 170 65Z"
+                                fill="#fffdf5" stroke="#c8b89f" stroke-width="5"/>
+
+                            <path d="M215 100 L250 85 L285 110 L270 165 L230 175Z"
+                                fill="#fffdf5" stroke="#e4d5bd" stroke-width="3"/>
+
+                        </svg>
+
+                    </div>
+
+
+                    <div class="comparison-divider" id="comparisonDivider"></div>
+
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="50"
+                        class="comparison-range"
+                        id="comparisonRange"
+                        aria-label="مقایسه قبل و بعد">
+
+                    <span class="comparison-label before-label">قبل</span>
+                    <span class="comparison-label after-label">بعد</span>
+
+                </div>
+
+                <p class="comparison-note">
+                    تصویر بالا یک طرح شماتیک آموزشی است و نمونه واقعی درمان نیست.
+                </p>
+
+            </div>
+
         </section>
 
-        <section class="appointment container" id="appointment">
-            <span class="eyebrow">YOUR JOURNEY STARTS HERE</span>
-            <h2>Ready for your <em>best smile?</em></h2>
 
-            <a href="#contact" class="primary-btn">
-                Request an Appointment ↗
-            </a>
+        <!-- Quote -->
+
+        <section class="quote-section">
+
+            <div class="container">
+
+                <span>“</span>
+
+                <h2>
+                    لبخند شما ارزشمند است؛
+                    مراقبت از آن را جدی بگیرید.
+                </h2>
+
+            </div>
+
         </section>
+
+
+        <!-- Appointment -->
+
+        <section class="appointment section-padding" id="appointment">
+
+            <div class="container appointment-grid">
+
+                <div class="appointment-info">
+
+                    <span class="eyebrow">درخواست نوبت</span>
+
+                    <h2>
+                        برای دریافت نوبت،
+                        <br>
+                        فرم را تکمیل کنید.
+                    </h2>
+
+                    <p>
+                        اطلاعات خود را وارد کنید تا درخواست شما ثبت شود.
+                        برای هماهنگی نهایی، مطب باید با شما تماس بگیرد.
+                    </p>
+
+                    <div class="appointment-detail">
+                        <span>✦</span>
+                        ثبت درخواست نوبت
+                    </div>
+
+                    <div class="appointment-detail">
+                        <span>✦</span>
+                        انتخاب خدمت موردنظر
+                    </div>
+
+                    <div class="appointment-detail">
+                        <span>✦</span>
+                        انتخاب تاریخ پیشنهادی
+                    </div>
+
+                </div>
+
+
+                <form class="appointment-form" id="appointmentForm">
+
+                    <h3>فرم درخواست نوبت</h3>
+
+                    <div class="form-group">
+
+                        <label for="patientName">نام و نام خانوادگی</label>
+
+                        <input
+                            type="text"
+                            id="patientName"
+                            placeholder="نام خود را وارد کنید"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="patientPhone">شماره موبایل</label>
+
+                        <input
+                            type="tel"
+                            id="patientPhone"
+                            placeholder="مثلاً 09123456789"
+                            pattern="09[0-9]{9}"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="service">خدمت موردنظر</label>
+
+                            <select id="service" required>
+
+                                <option value="">انتخاب کنید</option>
+                                <option>ترمیم دندان</option>
+                                <option>ایمپلنت</option>
+                                <option>درمان ریشه</option>
+                                <option>جرم‌گیری</option>
+                                <option>دندان‌پزشکی زیبایی</option>
+                                <option>مشاوره</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="date">تاریخ پیشنهادی</label>
+
+                            <input
+                                type="date"
+                                id="date"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="time">زمان پیشنهادی</label>
+
+                        <select id="time" required>
+
+                            <option value="">انتخاب کنید</option>
+                            <option>صبح</option>
+                            <option>ظهر</option>
+                            <option>عصر</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="message">توضیحات بیشتر (اختیاری)</label>
+
+                        <textarea
+                            id="message"
+                            rows="3"
+                            placeholder="اگر توضیحی دارید بنویسید..."></textarea>
+
+                    </div>
+
+
+                    <button type="submit" class="primary-button form-submit">
+                        ثبت درخواست
+                    </button>
+
+                    <p class="form-message" id="formMessage"></p>
+
+                    <small class="form-warning">
+                        توجه: در این نسخه درخواست فقط در همین مرورگر ذخیره می‌شود
+                        و به مطب ارسال نخواهد شد.
+                    </small>
+
+                </form>
+
+            </div>
+
+        </section>
+
 
     </main>
 
-    <footer id="contact">
-        <div class="container footer-inner">
-            <a href="#" class="logo">
-                PURE<span>DENT</span>
-                <small>PREMIUM DENTAL CARE</small>
-            </a>
 
-            <p>Designed with care. Created for confident smiles.</p>
+    <!-- Footer -->
 
-            <span>© 2026 PureDent. All rights reserved.</span>
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div>
+                <h3>دکتر شوله نعمتی</h3>
+                <p>مطب دندان‌پزشکی</p>
+            </div>
+
+            <div>
+                <p>مراقبت از سلامت و زیبایی لبخند شما</p>
+            </div>
+
+            <a href="#home">بازگشت به بالا ↑</a>
+
         </div>
+
+        <div class="footer-bottom">
+            تمامی حقوق این وب‌سایت محفوظ است.
+        </div>
+
     </footer>
+
 
     <script src="js/script.js"></script>
 

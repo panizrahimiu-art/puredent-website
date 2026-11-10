@@ -280,85 +280,249 @@
 
         <!-- Before After -->
 
-        <section class="results section-padding" id="results">
+       <section class="results section-padding" id="results">
 
-            <div class="container">
+    <div class="container">
 
-                <div class="section-heading">
+        <div class="section-heading">
 
-                    <span class="eyebrow">آشنایی با ترمیم دندان</span>
+            <span class="eyebrow">تفاوت یک ترمیم اصولی</span>
 
-                    <h2>قبل و بعد از ترمیم</h2>
+            <h2>بازگشت زیبایی به لبخند شما</h2>
 
-                    <p>
-                        برای مشاهده تفاوت، نوار وسط تصویر را حرکت دهید.
-                    </p>
+            <p>
+                تغییر ظاهر دندان را قبل و بعد از ترمیم مشاهده کنید.
+            </p>
+
+        </div>
+
+
+        <div class="comparison">
+
+            <div class="tooth-scene">
+
+                <!-- BEFORE -->
+
+                <div class="tooth-before">
+
+                    <span class="tooth-status">قبل از ترمیم</span>
+
+                    <svg viewBox="0 0 500 400">
+
+                        <defs>
+
+                            <radialGradient id="toothBefore" cx="35%" cy="25%" r="75%">
+
+                                <stop offset="0%" stop-color="#fff8e7"/>
+                                <stop offset="55%" stop-color="#e8d9bd"/>
+                                <stop offset="100%" stop-color="#b9a487"/>
+
+                            </radialGradient>
+
+                            <radialGradient id="decay" cx="40%" cy="35%">
+
+                                <stop offset="0%" stop-color="#39251e"/>
+                                <stop offset="60%" stop-color="#68402c"/>
+                                <stop offset="100%" stop-color="#98704c"/>
+
+                            </radialGradient>
+
+                            <filter id="toothShadow">
+
+                                <feGaussianBlur stdDeviation="9"/>
+
+                            </filter>
+
+                        </defs>
+
+
+                        <ellipse
+                            cx="250"
+                            cy="340"
+                            rx="115"
+                            ry="19"
+                            fill="#594533"
+                            opacity=".18"
+                            filter="url(#toothShadow)"/>
+
+
+                        <path
+                            d="M145 75
+                            C95 100 100 185 135 235
+                            C155 270 165 330 195 330
+                            C220 330 225 260 250 255
+                            C275 260 280 330 305 330
+                            C335 330 345 270 365 235
+                            C400 185 405 100 355 75
+                            C315 55 280 75 250 95
+                            C220 75 185 55 145 75Z"
+
+                            fill="url(#toothBefore)"
+                            stroke="#b7a489"
+                            stroke-width="5"/>
+
+
+                        <path
+                            d="M202 116
+                            C220 93 280 93 298 116
+                            C320 143 295 177 270 190
+                            C250 202 225 188 211 174
+                            C190 155 185 133 202 116Z"
+
+                            fill="url(#decay)"/>
+
+
+                        <path
+                            d="M222 120
+                            C235 110 260 111 270 125
+                            C278 140 258 155 240 153
+                            C220 150 210 133 222 120Z"
+
+                            fill="#3c2920"
+                            opacity=".9"/>
+
+
+                        <path
+                            d="M155 100
+                            C180 80 210 83 226 95"
+
+                            fill="none"
+                            stroke="#ffffff"
+                            stroke-width="9"
+                            opacity=".35"
+                            stroke-linecap="round"/>
+
+                    </svg>
 
                 </div>
 
 
-                <div class="comparison">
+                <!-- AFTER -->
 
-                    <div class="comparison-before">
+                <div class="tooth-after">
 
-                        <svg viewBox="0 0 500 320">
+                    <span class="tooth-status">بعد از ترمیم</span>
 
-                            <rect width="500" height="320" fill="#e8ddd0"/>
+                    <svg viewBox="0 0 500 400">
 
-                            <path d="M170 65 C125 90 130 180 165 230 C190 275 230 260 250 235 C275 270 315 275 340 230 C375 180 375 90 330 65 C295 40 275 65 250 85 C225 65 205 40 170 65Z"
-                                fill="#f8f0df" stroke="#c8b89f" stroke-width="5"/>
+                        <defs>
 
-                            <path d="M215 100 L250 85 L285 110 L270 165 L230 175Z"
-                                fill="#8a6550"/>
+                            <radialGradient id="toothAfter" cx="30%" cy="20%" r="80%">
 
-                            <path d="M230 175 L250 85 L270 165Z"
-                                fill="#b17c5d"/>
+                                <stop offset="0%" stop-color="#ffffff"/>
+                                <stop offset="50%" stop-color="#fffdf4"/>
+                                <stop offset="100%" stop-color="#d9cdb9"/>
 
-                        </svg>
+                            </radialGradient>
 
-                    </div>
+                            <linearGradient id="filling" x1="0%" y1="0%" x2="100%" y2="100%">
 
+                                <stop offset="0%" stop-color="#ffffff"/>
+                                <stop offset="50%" stop-color="#f9f6ec"/>
+                                <stop offset="100%" stop-color="#d8cdbb"/>
 
-                    <div class="comparison-after">
+                            </linearGradient>
 
-                        <svg viewBox="0 0 500 320">
+                            <filter id="afterShadow">
 
-                            <rect width="500" height="320" fill="#e8ddd0"/>
+                                <feGaussianBlur stdDeviation="9"/>
 
-                            <path d="M170 65 C125 90 130 180 165 230 C190 275 230 260 250 235 C275 270 315 275 340 230 C375 180 375 90 330 65 C295 40 275 65 250 85 C225 65 205 40 170 65Z"
-                                fill="#fffdf5" stroke="#c8b89f" stroke-width="5"/>
+                            </filter>
 
-                            <path d="M215 100 L250 85 L285 110 L270 165 L230 175Z"
-                                fill="#fffdf5" stroke="#e4d5bd" stroke-width="3"/>
-
-                        </svg>
-
-                    </div>
+                        </defs>
 
 
-                    <div class="comparison-divider" id="comparisonDivider"></div>
+                        <ellipse
+                            cx="250"
+                            cy="340"
+                            rx="115"
+                            ry="19"
+                            fill="#594533"
+                            opacity=".16"
+                            filter="url(#afterShadow)"/>
 
-                    <input
-                        type="range"
-                        min="0"
-                        max="100"
-                        value="50"
-                        class="comparison-range"
-                        id="comparisonRange"
-                        aria-label="مقایسه قبل و بعد">
 
-                    <span class="comparison-label before-label">قبل</span>
-                    <span class="comparison-label after-label">بعد</span>
+                        <path
+                            d="M145 75
+                            C95 100 100 185 135 235
+                            C155 270 165 330 195 330
+                            C220 330 225 260 250 255
+                            C275 260 280 330 305 330
+                            C335 330 345 270 365 235
+                            C400 185 405 100 355 75
+                            C315 55 280 75 250 95
+                            C220 75 185 55 145 75Z"
+
+                            fill="url(#toothAfter)"
+                            stroke="#c8bda9"
+                            stroke-width="5"/>
+
+
+                        <path
+                            d="M202 116
+                            C220 93 280 93 298 116
+                            C320 143 295 177 270 190
+                            C250 202 225 188 211 174
+                            C190 155 185 133 202 116Z"
+
+                            fill="url(#filling)"
+                            stroke="#d5c9b5"
+                            stroke-width="3"/>
+
+
+                        <path
+                            d="M155 100
+                            C180 80 210 83 226 95"
+
+                            fill="none"
+                            stroke="#ffffff"
+                            stroke-width="11"
+                            opacity=".8"
+                            stroke-linecap="round"/>
+
+
+                        <path
+                            d="M300 100
+                            C325 91 345 110 350 130"
+
+                            fill="none"
+                            stroke="#ffffff"
+                            stroke-width="6"
+                            opacity=".6"
+                            stroke-linecap="round"/>
+
+                    </svg>
 
                 </div>
-
-                <p class="comparison-note">
-                    تصویر بالا یک طرح شماتیک آموزشی است و نمونه واقعی درمان نیست.
-                </p>
 
             </div>
 
-        </section>
+
+            <div class="comparison-divider" id="comparisonDivider">
+
+                <span>↔</span>
+
+            </div>
+
+
+            <input
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                class="comparison-range"
+                id="comparisonRange">
+
+        </div>
+
+
+        <p class="comparison-note">
+            تصویر نمایشی و سه‌بعدی‌سازی شماتیک است و نتیجه واقعی درمان را نشان نمی‌دهد.
+        </p>
+
+    </div>
+
+</section>
 
 
         <!-- Quote -->

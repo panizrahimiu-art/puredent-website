@@ -705,3 +705,136 @@ img {
     }
 
 }
+/* 3D TOOTH COMPARISON */
+
+.results {
+    background: #faf8f3;
+    overflow: hidden;
+}
+
+.comparison {
+    position: relative;
+    max-width: 850px;
+    height: 470px;
+    margin: 45px auto 0;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            ellipse at center,
+            #ffffff 0%,
+            #f0e9dc 65%,
+            #e9dfd0 100%
+        );
+    border: 1px solid #e8dfd2;
+}
+
+.tooth-scene {
+    position: absolute;
+    inset: 0;
+}
+
+.tooth-before,
+.tooth-after {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tooth-before svg,
+.tooth-after svg {
+    width: 80%;
+    height: 90%;
+    overflow: visible;
+}
+
+.tooth-after {
+    clip-path: inset(0 0 0 50%);
+}
+
+.tooth-status {
+    position: absolute;
+    top: 25px;
+    padding: 8px 20px;
+    background: rgba(255,255,255,.85);
+    color: #695744;
+    font-size: 13px;
+    z-index: 3;
+}
+
+.tooth-before .tooth-status {
+    right: 25px;
+}
+
+.tooth-after .tooth-status {
+    left: 25px;
+}
+
+.comparison-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 50%;
+    width: 2px;
+    background: white;
+    transform: translateX(50%);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 12px #00000020;
+    pointer-events: none;
+}
+
+.comparison-divider span {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #fff;
+    color: #a78359;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 15px #00000020;
+    font-size: 23px;
+}
+
+.comparison-range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: ew-resize;
+    z-index: 5;
+}
+
+.comparison-note {
+    text-align: center;
+    font-size: 12px;
+    color: #968879;
+    margin-top: 22px;
+}
+
+@media(max-width: 700px) {
+
+    .hero-content {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-image {
+        height: 370px;
+        margin: 0;
+    }
+
+    .comparison {
+        height: 340px;
+    }
+
+    .tooth-before svg,
+    .tooth-after svg {
+        width: 100%;
+    }
+
+}

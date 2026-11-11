@@ -19,115 +19,199 @@
 </head>
 <body>
 
-<!-- ───────────── SVG sprite: gradients, tooth shape, icons ───────────── -->
+<!-- SVG sprite -->
 <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
   <defs>
-    <!-- the tooth silhouette used everywhere (200 × 260) -->
     <path id="toothPath" d="M100 44C118 30 150 30 164 52C176 72 170 100 160 120C154 140 156 170 150 205C146 232 130 240 122 220C116 200 112 170 100 160C88 170 84 200 78 220C70 240 54 232 50 205C44 170 46 140 40 120C30 100 24 72 36 52C50 30 82 30 100 44Z"/>
     <path id="pulpPath" d="M100 70C120 62 138 74 138 96C138 116 132 128 130 150C129 175 134 200 130 214C128 222 124 218 122 208C118 188 114 170 100 164C86 170 82 188 78 208C76 218 72 222 70 214C66 200 71 175 70 150C68 128 62 116 62 96C62 74 80 62 100 70Z"/>
 
     <linearGradient id="gToothSolid" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#f3f0eb"/><stop offset="1" stop-color="#d6d0c7"/>
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".5" stop-color="#f3f0eb"/>
+      <stop offset="1" stop-color="#d6d0c7"/>
     </linearGradient>
+
     <linearGradient id="gToothPink" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#f6f1ed"/><stop offset="1" stop-color="#e59a98"/>
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".5" stop-color="#f6f1ed"/>
+      <stop offset="1" stop-color="#e59a98"/>
     </linearGradient>
+
     <linearGradient id="gToothGlass" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset="1" stop-color="#cfd0d6" stop-opacity=".75"/>
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#cfd0d6" stop-opacity=".75"/>
     </linearGradient>
+
     <linearGradient id="gPulp" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#d9c9d6"/><stop offset="1" stop-color="#a99bb0"/>
+      <stop offset="0" stop-color="#d9c9d6"/>
+      <stop offset="1" stop-color="#a99bb0"/>
     </linearGradient>
+
     <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#ffffff" stop-opacity=".85"/>
       <stop offset=".45" stop-color="#bfcad2" stop-opacity=".3"/>
       <stop offset="1" stop-color="#ffffff" stop-opacity=".62"/>
     </linearGradient>
+
     <linearGradient id="gPed" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dcd7cf"/>
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#dcd7cf"/>
     </linearGradient>
+
     <linearGradient id="gOrbit" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#c9a27a" stop-opacity="0"/>
       <stop offset=".5" stop-color="#ffffff" stop-opacity=".95"/>
       <stop offset="1" stop-color="#c9a27a" stop-opacity="0"/>
     </linearGradient>
+
     <linearGradient id="gTan" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#d8b894"/><stop offset="1" stop-color="#9c7a58"/>
+      <stop offset="0" stop-color="#d8b894"/>
+      <stop offset="1" stop-color="#9c7a58"/>
     </linearGradient>
+
     <linearGradient id="gSilver" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#9aa1a8"/><stop offset=".45" stop-color="#eef0f2"/><stop offset="1" stop-color="#8a9097"/>
+      <stop offset="0" stop-color="#9aa1a8"/>
+      <stop offset=".45" stop-color="#eef0f2"/>
+      <stop offset="1" stop-color="#8a9097"/>
     </linearGradient>
+
     <linearGradient id="gHudTooth" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#cfe6ee" stop-opacity=".28"/><stop offset="1" stop-color="#6e9aa8" stop-opacity=".1"/>
+      <stop offset="0" stop-color="#cfe6ee" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#6e9aa8" stop-opacity=".1"/>
     </linearGradient>
+
     <linearGradient id="gScan" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#b9e4f2" stop-opacity="0"/>
       <stop offset=".5" stop-color="#e8f8ff" stop-opacity="1"/>
       <stop offset="1" stop-color="#b9e4f2" stop-opacity="0"/>
     </linearGradient>
+
     <pattern id="pMesh" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(24)">
       <path d="M0 0H9M0 0V9" fill="none" stroke="#dff3fa" stroke-opacity=".38" stroke-width=".7"/>
     </pattern>
+
     <filter id="fShadow" x="-30%" y="-30%" width="160%" height="170%">
       <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#5a4632" flood-opacity=".22"/>
     </filter>
-    <filter id="fBlur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-    <filter id="fGlow" x="-20%" y="-80%" width="140%" height="260%"><feGaussianBlur stdDeviation="5"/></filter>
+
+    <filter id="fBlur" x="-20%" y="-50%" width="140%" height="200%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+
+    <filter id="fGlow" x="-20%" y="-80%" width="140%" height="260%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
 
     <!-- icons -->
     <symbol id="i-logo" viewBox="0 0 32 32">
-      <g transform="translate(5.2 1.8) scale(.11)"><use href="#toothPath" fill="none" stroke="currentColor" stroke-width="13" stroke-linejoin="round"/></g>
+      <g transform="translate(5.2 1.8) scale(.11)">
+        <use href="#toothPath" fill="none" stroke="currentColor" stroke-width="13" stroke-linejoin="round"/>
+      </g>
     </symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
-    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
-    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
-    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V16h0A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="12" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/></symbol>
-    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2c.6 5 2.4 7.2 8 8-5.6.8-7.4 3-8 8-.6-5-2.4-7.2-8-8 5.6-.8 7.4-3 8-8z"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 
-    <!-- service icons (64 × 64) -->
+    <symbol id="i-arrow" viewBox="0 0 24 24">
+      <path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-left" viewBox="0 0 24 24">
+      <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-right" viewBox="0 0 24 24">
+      <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="i-chat" viewBox="0 0 24 24">
+      <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V16h0A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+      <circle cx="9" cy="10" r="1" fill="currentColor"/>
+      <circle cx="12" cy="10" r="1" fill="currentColor"/>
+      <circle cx="15" cy="10" r="1" fill="currentColor"/>
+    </symbol>
+
+    <symbol id="i-sparkle" viewBox="0 0 24 24">
+      <path d="M12 2c.6 5 2.4 7.2 8 8-5.6.8-7.4 3-8 8-.6-5-2.4-7.2-8-8 5.6-.8 7.4-3 8-8z"/>
+    </symbol>
+
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- service icons -->
     <symbol id="i-cosmetic" viewBox="0 0 64 64">
-      <g transform="translate(11 3) scale(.21)"><use href="#toothPath" fill="url(#gToothPink)" stroke="#dcd2c8" stroke-width="3"/></g>
+      <g transform="translate(11 3) scale(.21)">
+        <use href="#toothPath" fill="url(#gToothPink)" stroke="#dcd2c8" stroke-width="3"/>
+      </g>
       <use href="#i-sparkle" x="41" y="4" width="17" height="17" fill="#c9a27a"/>
     </symbol>
+
     <symbol id="i-implant" viewBox="0 0 64 64">
       <path d="M17 9h30a6 6 0 0 1 6 6v9a15 15 0 0 1-15 15H26A15 15 0 0 1 11 24v-9a6 6 0 0 1 6-6z" fill="url(#gToothSolid)" stroke="#d8d3cb" stroke-width="1.4"/>
       <rect x="23" y="38" width="18" height="5" rx="2" fill="url(#gSilver)"/>
       <rect x="26.5" y="42" width="11" height="17" rx="3" fill="url(#gSilver)"/>
       <path d="M26 47h12M26 51.5h12M27 56h10" stroke="#757d85" stroke-width="1.2" stroke-linecap="round"/>
     </symbol>
+
     <symbol id="i-whitening" viewBox="0 0 64 64">
-      <g transform="translate(4 14) scale(.19)"><use href="#toothPath" fill="url(#gToothSolid)" stroke="#d8d3cb" stroke-width="3"/></g>
-      <g transform="translate(25 8) scale(.19)"><use href="#toothPath" fill="url(#gToothSolid)" stroke="#d8d3cb" stroke-width="3"/></g>
+      <g transform="translate(4 14) scale(.19)">
+        <use href="#toothPath" fill="url(#gToothSolid)" stroke="#d8d3cb" stroke-width="3"/>
+      </g>
+      <g transform="translate(25 8) scale(.19)">
+        <use href="#toothPath" fill="url(#gToothSolid)" stroke="#d8d3cb" stroke-width="3"/>
+      </g>
       <use href="#i-sparkle" x="45" y="3" width="14" height="14" fill="#c9a27a"/>
       <use href="#i-sparkle" x="4" y="4" width="9" height="9" fill="#dcc4a6"/>
     </symbol>
+
     <symbol id="i-shield" viewBox="0 0 64 64">
       <path d="M32 5l22 8v17c0 14-10 24-22 29C20 54 10 44 10 30V13z" fill="url(#gTan)"/>
-      <g transform="translate(22.5 17) scale(.14)"><use href="#toothPath" fill="#fff"/></g>
+      <g transform="translate(22.5 17) scale(.14)">
+        <use href="#toothPath" fill="#fff"/>
+      </g>
     </symbol>
+
     <symbol id="i-braces" viewBox="0 0 64 64">
-      <g transform="translate(14 4) scale(.18)"><use href="#toothPath" fill="url(#gToothSolid)" stroke="#d8d3cb" stroke-width="3"/></g>
+      <g transform="translate(14 4) scale(.18)">
+        <use href="#toothPath" fill="url(#gToothSolid)" stroke="#d8d3cb" stroke-width="3"/>
+      </g>
       <path d="M3 25h58" stroke="#8a9099" stroke-width="2.2" stroke-linecap="round"/>
       <rect x="26" y="20.5" width="12" height="9" rx="2.4" fill="#d5dade" stroke="#8a9099" stroke-width="1.2"/>
     </symbol>
+
     <symbol id="i-root" viewBox="0 0 64 64">
       <g transform="translate(14 4) scale(.18)">
         <use href="#toothPath" fill="url(#gToothSolid)" stroke="#bdb7ae" stroke-width="3"/>
         <use href="#pulpPath" fill="url(#gPulp)" stroke="#8d7f96" stroke-width="3"/>
       </g>
     </symbol>
+
   </defs>
 </svg>
-<!-- ───────────── Header ───────────── -->
+
+<!-- Header -->
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
+
     <a class="brand" href="#home" aria-label="دکتر شعله نعمتی — صفحه‌ی اصلی">
-      <svg class="brand-mark" aria-hidden="true"><use href="#i-logo"/></svg>
-      <span class="brand-text"><strong>دکتر شعله نعمتی</strong><small>دندان‌پزشکی</small></span>
+      <svg class="brand-mark" aria-hidden="true">
+        <use href="#i-logo"/>
+      </svg>
+      <span class="brand-text">
+        <strong>دکتر شعله نعمتی</strong>
+        <small>دندان‌پزشکی</small>
+      </span>
     </a>
 
     <nav class="nav" id="nav" aria-label="منوی اصلی">
@@ -136,14 +220,20 @@
       <a href="#technology" data-nav="technology">فناوری</a>
       <a href="#about" data-nav="about">درباره‌ی ما</a>
       <a href="#contact" data-nav="contact">تماس</a>
-      <button class="btn btn-tan btn-sm nav-cta" type="button" data-open-booking>رزرو مشاوره</button>
+      <button class="btn btn-tan btn-sm nav-cta" type="button" data-open-booking>
+        رزرو مشاوره
+      </button>
     </nav>
 
     <div class="header-actions">
-      <button class="btn btn-tan btn-sm header-cta" type="button" data-open-booking>مشاوره</button>
+      <button class="btn btn-tan btn-sm header-cta" type="button" data-open-booking>
+        مشاوره
+      </button>
+
       <button class="icon-btn" id="searchBtn" type="button" aria-label="جستجو در سایت" aria-expanded="false" aria-controls="searchPanel">
         <svg aria-hidden="true"><use href="#i-search"/></svg>
       </button>
+
       <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="باز کردن منو" aria-expanded="false" aria-controls="nav">
         <svg aria-hidden="true"><use href="#i-menu"/></svg>
       </button>
@@ -161,7 +251,7 @@
   </div>
 </header>
 
-<!-- section dots (desktop) -->
+<!-- section dots -->
 <nav class="dots-nav" aria-label="بخش‌های صفحه">
   <a href="#home" data-nav="home" aria-label="خانه"></a>
   <a href="#treatments" data-nav="treatments" aria-label="خدمات"></a>
@@ -172,91 +262,120 @@
 
 <main>
 
-<!-- ───────────── Hero ───────────── -->
+<!-- Hero -->
 <section class="hero" id="home" data-section>
   <div class="container hero-grid">
+
     <div class="hero-copy">
-      <h1 class="reveal">لبخندی زیباتر،<br>از همین‌جا شروع می‌شود.</h1>
-      <p class="lead reveal" style="--d:.1s">مراقبت پیشرفته‌ی دندان با دقت، آرامش و فناوری روز.</p>
+      <h1 class="reveal">
+        لبخندی زیباتر،<br>
+        از همین‌جا شروع می‌شود.
+      </h1>
+
+      <p class="lead reveal" style="--d:.1s">
+        مراقبت پیشرفته‌ی دندان با دقت، آرامش و فناوری روز.
+      </p>
+
       <div class="reveal" style="--d:.2s">
-        <button class="btn btn-tan" type="button" data-open-booking>رزرو مشاوره <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <button class="btn btn-tan" type="button" data-open-booking>
+          رزرو مشاوره
+          <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+        </button>
       </div>
     </div>
 
     <div class="hero-stage reveal" style="--d:.15s" id="heroStage">
       <svg class="stage-svg" viewBox="0 70 420 380" role="img" aria-label="دندانی زیر گنبد شیشه‌ای">
-        <!-- ground shadow + pedestal -->
+
         <ellipse cx="210" cy="424" rx="175" ry="24" fill="#5a4632" opacity=".16" filter="url(#fBlur)"/>
         <ellipse cx="210" cy="404" rx="162" ry="30" fill="url(#gPed)"/>
         <ellipse cx="210" cy="394" rx="134" ry="20" fill="#fff"/>
 
         <ellipse cx="210" cy="391" rx="66" ry="8" fill="#5a4632" opacity=".22" filter="url(#fBlur)"/>
 
-        <!-- dome tint (behind the tooth) -->
         <path d="M100 394V226C100 140 150 94 210 94C270 94 320 140 320 226V394A110 18 0 0 1 100 394Z" fill="url(#gGlass)"/>
 
-        <!-- tooth -->
         <g transform="translate(120 122) scale(.9)">
           <g class="tooth-float" filter="url(#fShadow)">
+
             <g class="tooth-solid">
               <use href="#toothPath" fill="url(#gToothSolid)" stroke="#e4dfd8" stroke-width="1.5"/>
               <path d="M62 60C76 46 98 46 110 58" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".9"/>
               <path d="M52 90C50 112 58 130 66 142" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".6"/>
             </g>
+
             <g class="tooth-anatomy">
               <use href="#toothPath" fill="url(#gToothGlass)" stroke="#8d8a96" stroke-width="2.2"/>
+
               <g transform="translate(100 150) scale(.86) translate(-100 -150)">
                 <use href="#toothPath" fill="none" stroke="#b9b4c0" stroke-width="2"/>
               </g>
+
               <use href="#pulpPath" fill="url(#gPulp)" stroke="#6f6679" stroke-width="2.4"/>
+
               <path d="M100 120V160M118 112C124 130 124 148 122 170M82 112C76 130 76 148 78 170" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
             </g>
+
           </g>
         </g>
 
-        <!-- glass dome -->
         <path d="M100 394V226C100 140 150 94 210 94C270 94 320 140 320 226V394A110 18 0 0 1 100 394Z" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="2"/>
         <path d="M100 394V226C100 140 150 94 210 94C270 94 320 140 320 226V394A110 18 0 0 1 100 394Z" fill="none" stroke="#8f8579" stroke-opacity=".4" stroke-width="1.2"/>
+
         <path d="M117 236C117 172 144 126 184 110" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".85"/>
         <path d="M303 206C299 176 289 152 272 134" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/>
 
-        <!-- orbit rings -->
         <g transform="rotate(-13 210 250)">
           <ellipse cx="210" cy="250" rx="200" ry="46" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.2"/>
           <ellipse class="orbit-light" cx="210" cy="250" rx="200" ry="46" fill="none" stroke="url(#gOrbit)" stroke-width="3" stroke-linecap="round" pathLength="100" stroke-dasharray="26 74"/>
         </g>
+
         <g transform="rotate(9 210 262)">
           <ellipse cx="210" cy="262" rx="176" ry="34" fill="none" stroke="#c9a27a" stroke-opacity=".35" stroke-width="1"/>
         </g>
 
-        <!-- motes -->
         <g fill="#c9a27a">
           <circle class="mote" cx="74" cy="150" r="2.4" style="--t:3.2s"/>
           <circle class="mote" cx="352" cy="214" r="2" style="--t:4.1s"/>
           <circle class="mote" cx="318" cy="92" r="1.8" style="--t:2.7s"/>
           <circle class="mote" cx="44" cy="296" r="1.6" style="--t:3.6s"/>
         </g>
+
       </svg>
 
       <div class="float-card fc-1">
-        <span class="fc-ico"><svg aria-hidden="true"><use href="#i-sparkle"/></svg></span>
-        <div><strong>مراقبت مدرن</strong><small>طراحی دیجیتال لبخند</small></div>
+        <span class="fc-ico">
+          <svg aria-hidden="true"><use href="#i-sparkle"/></svg>
+        </span>
+        <div>
+          <strong>مراقبت مدرن</strong>
+          <small>طراحی دیجیتال لبخند</small>
+        </div>
       </div>
+
       <div class="float-card fc-2">
-        <span class="fc-ico"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
-        <div><strong>مراقبت ملایم</strong><small>لبخندی ماندگار</small></div>
+        <span class="fc-ico">
+          <svg aria-hidden="true"><use href="#i-check"/></svg>
+        </span>
+        <div>
+          <strong>مراقبت ملایم</strong>
+          <small>لبخندی ماندگار</small>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
-
 <!-- ───────────── Treatments ───────────── -->
 <section class="services section" id="treatments" data-section>
   <div class="container">
     <h2 class="section-title reveal">خدمات دندان‌پزشکی</h2>
 
     <div class="carousel reveal" data-carousel style="--d:.1s">
-      <button class="car-btn left" type="button" aria-label="نمایش خدمات بعدی"><svg aria-hidden="true"><use href="#i-left"/></svg></button>
+      <button class="car-btn left" type="button" aria-label="نمایش خدمات بعدی">
+        <svg aria-hidden="true"><use href="#i-left"/></svg>
+      </button>
+
       <div class="car-track" tabindex="0" aria-label="خدمات دندان‌پزشکی">
         <article class="svc-card">
           <div class="svc-ico"><svg aria-hidden="true"><use href="#i-cosmetic"/></svg></div>
@@ -264,30 +383,35 @@
           <p>لمینت، بندینگ و طراحی لبخند، متناسب با چهره‌ی شما.</p>
           <a class="svc-link" href="#contact">اطلاعات بیشتر <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
+
         <article class="svc-card">
           <div class="svc-ico"><svg aria-hidden="true"><use href="#i-implant"/></svg></div>
           <h3>ایمپلنت دندان</h3>
           <p>جایگزینی دائمی و راحت دندان از دست‌رفته، با برنامه‌ریزی دقیق.</p>
           <a class="svc-link" href="#contact">اطلاعات بیشتر <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
+
         <article class="svc-card">
           <div class="svc-ico"><svg aria-hidden="true"><use href="#i-whitening"/></svg></div>
           <h3>سفید کردن دندان</h3>
           <p>بلیچینگ حرفه‌ای و ایمن برای لبخندی روشن‌تر.</p>
           <a class="svc-link" href="#contact">اطلاعات بیشتر <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
+
         <article class="svc-card">
           <div class="svc-ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></div>
           <h3>مراقبت‌های پیشگیرانه</h3>
           <p>معاینه، جرم‌گیری و تشخیص زودهنگام برای سلامت پایدار دندان‌ها.</p>
           <a class="svc-link" href="#contact">اطلاعات بیشتر <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
+
         <article class="svc-card">
           <div class="svc-ico"><svg aria-hidden="true"><use href="#i-braces"/></svg></div>
           <h3>ارتودنسی</h3>
           <p>ارتودنسی ثابت و الاینر شفاف برای لبخندی منظم و با اعتماد‌به‌نفس.</p>
           <a class="svc-link" href="#contact">اطلاعات بیشتر <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
+
         <article class="svc-card">
           <div class="svc-ico"><svg aria-hidden="true"><use href="#i-root"/></svg></div>
           <h3>درمان ریشه (عصب‌کشی)</h3>
@@ -295,7 +419,10 @@
           <a class="svc-link" href="#contact">اطلاعات بیشتر <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
       </div>
-      <button class="car-btn right" type="button" aria-label="نمایش خدمات قبلی"><svg aria-hidden="true"><use href="#i-right"/></svg></button>
+
+      <button class="car-btn right" type="button" aria-label="نمایش خدمات قبلی">
+        <svg aria-hidden="true"><use href="#i-right"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -314,10 +441,16 @@
     <div class="tech-copy">
       <p class="eyebrow eyebrow-tan reveal">فناوری برتر</p>
       <h2 class="reveal" style="--d:.05s">فناوری<br>دقیق</h2>
-      <p class="lead reveal" style="--d:.1s">اسکن دیجیتال سه‌بعدی، برنامه‌ریزی هدایت‌شده و تصویربرداری مدرن؛ تا نتیجه را پیش از شروع ببینید.</p>
+      <p class="lead reveal" style="--d:.1s">
+        اسکن دیجیتال سه‌بعدی، برنامه‌ریزی هدایت‌شده و تصویربرداری مدرن؛ تا نتیجه را پیش از شروع ببینید.
+      </p>
+
       <div class="reveal" style="--d:.15s">
-        <button class="btn btn-tan" type="button" data-open-booking>رزرو مشاوره <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <button class="btn btn-tan" type="button" data-open-booking>
+          رزرو مشاوره <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+        </button>
       </div>
+
       <div class="tech-dots" role="tablist" aria-label="اسلایدهای فناوری">
         <button type="button" role="tab" class="is-active" aria-label="نقشه‌ی سه‌بعدی دندان"></button>
         <button type="button" role="tab" aria-label="تحلیل لبخند"></button>
@@ -326,45 +459,64 @@
     </div>
 
     <div class="slider reveal" data-slider style="--d:.1s">
+
       <!-- slide 1: 3D tooth HUD -->
       <div class="slide is-active">
         <svg class="hud" viewBox="0 0 640 440" role="img" aria-label="اسکن سه‌بعدی سیمی از دندان">
           <defs>
-            <clipPath id="cHud"><use href="#toothPath" transform="translate(204 70) scale(1.12)"/></clipPath>
+            <clipPath id="cHud">
+              <use href="#toothPath" transform="translate(204 70) scale(1.12)"/>
+            </clipPath>
           </defs>
-          <!-- ruler -->
+
           <line x1="72" y1="62" x2="72" y2="378" stroke="#8fb4c0" stroke-opacity=".6" stroke-width="12" stroke-dasharray="1 9"/>
           <line x1="86" y1="62" x2="86" y2="378" stroke="#8fb4c0" stroke-opacity=".25" stroke-width="1"/>
+
           <text x="96" y="70" class="hud-text">۰٫۰ میلی‌متر</text>
           <text x="96" y="378" class="hud-text">۱۲٫۴ میلی‌متر</text>
-          <!-- tooth -->
+
           <g transform="translate(204 70) scale(1.12)">
             <use href="#toothPath" fill="url(#gHudTooth)" stroke="#dff3fa" stroke-opacity=".85" stroke-width="1.4"/>
             <use href="#toothPath" fill="url(#pMesh)"/>
           </g>
+
           <g clip-path="url(#cHud)" fill="none" stroke="#dff3fa" stroke-opacity=".4" stroke-width=".8">
             <path d="M200 120Q320 140 440 120M200 150Q320 172 440 150M200 180Q320 204 440 180M200 210Q320 234 440 210M200 240Q320 262 440 240M200 270Q320 290 440 270M200 300Q320 316 440 300M200 330Q320 342 440 330"/>
             <path d="M320 60C300 140 300 240 320 340M270 70C250 150 258 250 276 340M370 70C390 150 382 250 364 340"/>
           </g>
+
           <rect class="scan-line" x="170" y="70" width="300" height="3" fill="url(#gScan)"/>
           <rect class="scan-glow" x="170" y="62" width="300" height="20" fill="url(#gScan)" opacity=".25" filter="url(#fGlow)"/>
-          <!-- HUD panels -->
+
           <g fill="none" stroke="#8fb4c0" stroke-opacity=".55">
             <rect x="476" y="52" width="124" height="124" rx="8"/>
             <rect x="476" y="204" width="124" height="124" rx="8"/>
           </g>
+
           <g transform="translate(538 114)" fill="none" stroke="#a9d3e0">
-            <circle r="42" stroke-opacity=".5"/><circle r="28" stroke-opacity=".5"/><circle r="14" stroke-opacity=".6"/>
+            <circle r="42" stroke-opacity=".5"/>
+            <circle r="28" stroke-opacity=".5"/>
+            <circle r="14" stroke-opacity=".6"/>
             <path d="M-42 0H42M0 -42V42" stroke-opacity=".18"/>
-            <g class="radar"><path d="M0 -42A42 42 0 0 1 36 -21" stroke-width="3" stroke-linecap="round" stroke="#e8f8ff"/></g>
+            <g class="radar">
+              <path d="M0 -42A42 42 0 0 1 36 -21" stroke-width="3" stroke-linecap="round" stroke="#e8f8ff"/>
+            </g>
           </g>
-          <g transform="translate(508 214) scale(.3)"><use href="#toothPath" fill="url(#gHudTooth)" stroke="#dff3fa" stroke-width="3"/></g>
-          <g stroke="#8fb4c0" stroke-opacity=".6" stroke-linecap="round" stroke-width="2"><path d="M490 312h50M490 320h78"/></g>
+
+          <g transform="translate(508 214) scale(.3)">
+            <use href="#toothPath" fill="url(#gHudTooth)" stroke="#dff3fa" stroke-width="3"/>
+          </g>
+
+          <g stroke="#8fb4c0" stroke-opacity=".6" stroke-linecap="round" stroke-width="2">
+            <path d="M490 312h50M490 320h78"/>
+          </g>
+
           <text x="476" y="368" class="hud-text">مینای دندان · ۹۸٪</text>
           <text x="476" y="384" class="hud-text">اسکن ۰۳ از ۱۲</text>
-          <!-- corner brackets -->
+
           <path d="M34 34V16h18M606 34V16h-18M606 406v18h-18" fill="none" stroke="#a9d3e0" stroke-opacity=".6" stroke-width="1.5"/>
         </svg>
+
         <span class="slide-label">نقشه‌ی سه‌بعدی دندان</span>
       </div>
 
@@ -374,7 +526,8 @@
           <img src="assets/smile.svg" alt="تحلیل دیجیتال لبخند">
           <img class="scan-overlay" src="assets/smile.svg" alt="" aria-hidden="true">
           <span class="scan-bar"></span>
-          <span class="corner c-tl"></span><span class="corner c-br"></span>
+          <span class="corner c-tl"></span>
+          <span class="corner c-br"></span>
         </div>
         <span class="slide-label">تحلیل لبخند</span>
       </div>
@@ -385,6 +538,7 @@
           <g stroke="#8fb4c0" stroke-opacity=".14">
             <path d="M0 110H640M0 220H640M0 330H640M107 0V440M213 0V440M320 0V440M427 0V440M533 0V440" fill="none"/>
           </g>
+
           <g fill="url(#gHudTooth)" stroke="#e3d2bb" stroke-opacity=".8" stroke-width="2.4">
             <g transform="translate(62 128) scale(.46) rotate(-14 100 130)"><use href="#toothPath"/></g>
             <g transform="translate(128 112) scale(.5) rotate(-9 100 130)"><use href="#toothPath"/></g>
@@ -394,15 +548,18 @@
             <g transform="translate(420 112) scale(.5) rotate(9 100 130)"><use href="#toothPath"/></g>
             <g transform="translate(486 128) scale(.46) rotate(14 100 130)"><use href="#toothPath"/></g>
           </g>
+
           <g fill="url(#gPulp)" opacity=".55" stroke="#e3d2bb" stroke-opacity=".5" stroke-width="1.2">
             <g transform="translate(274 96) scale(.54)"><use href="#pulpPath"/></g>
             <g transform="translate(200 100) scale(.52) rotate(-5 100 130)"><use href="#pulpPath"/></g>
             <g transform="translate(348 100) scale(.52) rotate(5 100 130)"><use href="#pulpPath"/></g>
           </g>
+
           <path d="M60 300C200 340 440 340 580 300" fill="none" stroke="#e3d2bb" stroke-opacity=".5" stroke-width="1.4" stroke-dasharray="3 6"/>
           <text x="60" y="372" class="hud-text">پانورامیک · ۱۰۰٪ قابل مشاهده</text>
           <rect class="scan-line scan-v" x="60" y="70" width="3" height="260" fill="url(#gScan)"/>
         </svg>
+
         <span class="slide-label">رادیوگرافی دیجیتال</span>
       </div>
     </div>
@@ -413,19 +570,24 @@
 <section class="transform section" id="about" data-section>
   <div class="container">
     <h2 class="section-title reveal">تحول لبخند</h2>
-    <p class="section-sub reveal" style="--d:.05s">رویکردی آرام و دقیق، از اولین مراجعه تا نتیجه‌ی نهایی.</p>
+    <p class="section-sub reveal" style="--d:.05s">
+      رویکردی آرام و دقیق، از اولین مراجعه تا نتیجه‌ی نهایی.
+    </p>
 
     <div class="glass-grid">
       <article class="glass-card reveal" data-tilt>
         <h3>آرامش</h3>
         <div class="gc-art">
           <img
-  src="https://images.pexels.com/photos/7479536/pexels-photo-7479536.jpeg?auto=compress&dpr=1&h=750&w=1260"
-  alt="لبخند طبیعی با دندان‌های نمایان"
-  class="gc-smile"
-  loading="lazy"
->
-          <svg class="gc-ring" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="12" fill="none" stroke="#fff" stroke-width="6"/><circle cx="20" cy="20" r="12" fill="none" stroke="#cfd3d8" stroke-width="6" stroke-dasharray="20 60"/></svg>
+            src="https://images.pexels.com/photos/7479536/pexels-photo-7479536.jpeg?auto=compress&dpr=1&h=750&w=1260"
+            alt="لبخند طبیعی با دندان‌های نمایان"
+            class="gc-smile"
+            loading="lazy"
+          >
+          <svg class="gc-ring" viewBox="0 0 40 40" aria-hidden="true">
+            <circle cx="20" cy="20" r="12" fill="none" stroke="#fff" stroke-width="6"/>
+            <circle cx="20" cy="20" r="12" fill="none" stroke="#cfd3d8" stroke-width="6" stroke-dasharray="20 60"/>
+          </svg>
         </div>
         <p>فضایی آرام، روش‌های ملایم و زمان کافی برای اینکه راحت باشید.</p>
         <a class="pill-dark" href="#contact">اطلاعات بیشتر <svg aria-hidden="true"><use href="#i-left"/></svg></a>
@@ -459,18 +621,30 @@
     </div>
   </div>
 </section>
-
 <!-- ───────────── Premium CTA / Contact ───────────── -->
 <section class="cta" id="contact" data-section>
-  <div class="cta-bg" aria-hidden="true"><img src="assets/smile.svg" alt=""></div>
+  <div class="cta-bg" aria-hidden="true">
+    <img src="assets/smile.svg" alt="">
+  </div>
+
   <div class="cta-overlay" aria-hidden="true"></div>
 
   <div class="container cta-inner">
     <p class="eyebrow reveal">دکتر شعله نعمتی · دندان‌پزشک</p>
-    <h2 class="reveal" style="--d:.05s">لبخند شما. دقت ما.</h2>
-    <p class="cta-sub reveal" style="--d:.1s">همین امروز مشاوره‌ی خود را رزرو کنید</p>
+
+    <h2 class="reveal" style="--d:.05s">
+      لبخند شما. دقت ما.
+    </h2>
+
+    <p class="cta-sub reveal" style="--d:.1s">
+      همین امروز مشاوره‌ی خود را رزرو کنید
+    </p>
+
     <div class="reveal" style="--d:.15s">
-      <button class="btn btn-glass btn-lg" type="button" data-open-booking>رزرو مشاوره <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      <button class="btn btn-glass btn-lg" type="button" data-open-booking>
+        رزرو مشاوره
+        <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+      </button>
     </div>
 
     <svg class="cta-arc reveal" viewBox="0 0 900 150" aria-hidden="true" style="--d:.3s">
@@ -483,10 +657,27 @@
           <stop offset="1" stop-color="#f3dcb8" stop-opacity="0"/>
         </linearGradient>
       </defs>
-      <path class="arc-glow" d="M30 24C230 150 670 150 870 24" fill="none" stroke="#ffe3b0" stroke-width="9" opacity=".55" filter="url(#fGlow)" pathLength="1"/>
-      <path class="arc-line" d="M30 24C230 150 670 150 870 24" fill="none" stroke="url(#gArc)" stroke-width="3" stroke-linecap="round" pathLength="1"/>
+
+      <path class="arc-glow"
+        d="M30 24C230 150 670 150 870 24"
+        fill="none"
+        stroke="#ffe3b0"
+        stroke-width="9"
+        opacity=".55"
+        filter="url(#fGlow)"
+        pathLength="1"/>
+
+      <path class="arc-line"
+        d="M30 24C230 150 670 150 870 24"
+        fill="none"
+        stroke="url(#gArc)"
+        stroke-width="3"
+        stroke-linecap="round"
+        pathLength="1"/>
+
       <circle class="arc-end" cx="30" cy="24" r="4" fill="#fff6e6"/>
       <circle class="arc-end" cx="870" cy="24" r="4" fill="#fff6e6"/>
+
       <g fill="#fff3da">
         <use class="spark" href="#i-sparkle" x="190" y="92" width="12" height="12" style="--t:2.4s"/>
         <use class="spark" href="#i-sparkle" x="330" y="112" width="9" height="9" style="--t:3.1s"/>
@@ -502,16 +693,36 @@
 <!-- ───────────── Footer ───────────── -->
 <footer class="site-footer">
   <div class="container footer-grid">
+
     <div class="footer-brand">
       <strong>دکتر شعله نعمتی</strong>
       <p>دندان‌پزشکی دقیق، همراه با آرامش.</p>
+
       <ul class="contact-list">
-        <li data-site-row="phone" hidden>تلفن: <a data-site-link="tel" href="#"><span data-site="phone"></span></a></li>
-        <li data-site-row="email" hidden>ایمیل: <a data-site-link="mailto" href="#"><span data-site="email"></span></a></li>
-        <li data-site-row="address" hidden><span data-site="address"></span></li>
-        <li data-site-row="hours" hidden><span data-site="hours"></span></li>
+        <li data-site-row="phone" hidden>
+          تلفن:
+          <a data-site-link="tel" href="#">
+            <span data-site="phone"></span>
+          </a>
+        </li>
+
+        <li data-site-row="email" hidden>
+          ایمیل:
+          <a data-site-link="mailto" href="#">
+            <span data-site="email"></span>
+          </a>
+        </li>
+
+        <li data-site-row="address" hidden>
+          <span data-site="address"></span>
+        </li>
+
+        <li data-site-row="hours" hidden>
+          <span data-site="hours"></span>
+        </li>
       </ul>
     </div>
+
     <nav class="footer-nav" aria-label="منوی پایین صفحه">
       <a href="#home">خانه</a>
       <a href="#treatments">خدمات</a>
@@ -519,10 +730,15 @@
       <a href="#about">درباره‌ی ما</a>
       <a href="#contact">تماس</a>
     </nav>
+
     <div class="footer-cta">
-      <button class="btn btn-tan btn-sm" type="button" data-open-booking>رزرو مشاوره</button>
+      <button class="btn btn-tan btn-sm" type="button" data-open-booking>
+        رزرو مشاوره
+      </button>
     </div>
+
   </div>
+
   <div class="container footer-bottom">
     <span>© <span id="year">۱۴۰۵</span> دکتر شعله نعمتی</span>
     <span class="sep" aria-hidden="true">|</span>
@@ -538,21 +754,54 @@
 </button>
 
 <!-- ───────────── Booking modal ───────────── -->
-<div class="modal" id="booking" role="dialog" aria-modal="true" aria-labelledby="bookingTitle" hidden>
+<div
+  class="modal"
+  id="booking"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="bookingTitle"
+  hidden
+>
   <div class="modal-backdrop" data-close></div>
+
   <div class="modal-panel">
-    <button class="modal-close" type="button" data-close aria-label="بستن"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+    <button class="modal-close" type="button" data-close aria-label="بستن">
+      <svg aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+
     <h3 id="bookingTitle">رزرو مشاوره</h3>
-    <p class="modal-sub">اطلاعات خود را بنویسید تا نوبت شما را تأیید کنیم.</p>
+
+    <p class="modal-sub">
+      اطلاعات خود را بنویسید تا نوبت شما را تأیید کنیم.
+    </p>
+
     <form id="bookingForm" novalidate>
-      <label>نام و نام‌خانوادگی
-        <input name="name" type="text" autocomplete="name" required placeholder="نام شما">
+
+      <label>
+        نام و نام‌خانوادگی
+        <input
+          name="name"
+          type="text"
+          autocomplete="name"
+          required
+          placeholder="نام شما"
+        >
       </label>
-      <label>شماره‌ی تماس
-        <input name="phone" type="tel" autocomplete="tel" required placeholder="شماره‌ی موبایل یا تلفن">
+
+      <label>
+        شماره‌ی تماس
+        <input
+          name="phone"
+          type="tel"
+          autocomplete="tel"
+          required
+          placeholder="شماره‌ی موبایل یا تلفن"
+        >
       </label>
+
       <div class="row-2">
-        <label>نوع درمان
+        <label>
+          نوع درمان
           <select name="service">
             <option>مشاوره‌ی عمومی</option>
             <option>دندان‌پزشکی زیبایی</option>
@@ -563,21 +812,47 @@
             <option>درمان ریشه (عصب‌کشی)</option>
           </select>
         </label>
-        <label>زمان دلخواه
-          <input name="date" type="text" placeholder="مثلاً: شنبه عصر">
+
+        <label>
+          زمان دلخواه
+          <input
+            name="date"
+            type="text"
+            placeholder="مثلاً: شنبه عصر"
+          >
         </label>
       </div>
-      <label><span>پیام <span class="opt">(اختیاری)</span></span>
-        <textarea name="message" rows="3" placeholder="اگر نکته‌ای هست بنویسید"></textarea>
+
+      <label>
+        <span>
+          پیام <span class="opt">(اختیاری)</span>
+        </span>
+
+        <textarea
+          name="message"
+          rows="3"
+          placeholder="اگر نکته‌ای هست بنویسید"
+        ></textarea>
       </label>
-      <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
-      <button class="btn btn-tan btn-block" type="submit">ارسال درخواست</button>
+
+      <p
+        class="form-note"
+        id="formNote"
+        role="status"
+        aria-live="polite"
+      ></p>
+
+      <button class="btn btn-tan btn-block" type="submit">
+        ارسال درخواست
+      </button>
+
     </form>
   </div>
 </div>
 
+<!-- JavaScript files -->
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
-<script src="js/script.js"></script>
+
 </body>
 </html>

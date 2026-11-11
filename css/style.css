@@ -460,3 +460,121 @@ button { font: inherit; color: inherit; }
   .reveal { opacity: 1; transform: none; }
   .arc-line, .arc-glow { stroke-dashoffset: 0; }
 }
+/* =========================================
+   Compatibility fixes — Dr. Sholeh Nemati
+   ========================================= */
+
+/* Reveal animations */
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Active navigation */
+.nav a.active {
+  color: var(--ink);
+}
+
+.nav a.active::after {
+  transform: scaleX(1);
+}
+
+/* Mobile menu */
+.nav.open {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+}
+
+/* Carousel buttons */
+.car-btn.left {
+  left: -23px;
+}
+
+.car-btn.right {
+  right: -23px;
+}
+
+/* Technology slider */
+.slide.active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.tech-dots button.active {
+  width: 48px;
+  background: var(--tan-2);
+}
+
+/* Search panel */
+.search-panel {
+  display: none;
+}
+
+.search-panel.open {
+  display: block;
+}
+
+.search-results {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.search-results a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.search-results a:hover {
+  background: rgba(156, 122, 88, .1);
+}
+
+/* Booking modal */
+.modal {
+  display: none;
+}
+
+.modal.open {
+  display: grid;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Form button */
+#bookingForm button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+/* Responsive fixes */
+@media (max-width: 1180px) {
+  .car-btn.left {
+    left: 6px;
+  }
+
+  .car-btn.right {
+    right: 6px;
+  }
+}
+
+@media (max-width: 680px) {
+  .car-btn {
+    display: none;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,574 +1,577 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>دکتر شعله نعمتی | مطب دندان‌پزشکی</title>
-
-    <meta name="description" content="مطب دندان‌پزشکی دکتر شعله نعمتی؛ ارائه خدمات تخصصی دندان‌پزشکی، زیبایی و ترمیمی.">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/style.css">
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PureDental — A Better Smile Begins Here</title>
+  <meta name="description" content="Advanced dental care with precision, comfort and modern technology. Book your consultation today.">
+  <meta name="theme-color" content="#f6f2ec">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PureDental — A Better Smile Begins Here">
+  <meta property="og:description" content="Advanced dental care with precision, comfort and modern technology.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}.slide:first-child{opacity:1!important}</style></noscript>
 </head>
-
 <body>
 
-    <!-- HEADER -->
+<!-- ───────────── SVG sprite: gradients, tooth shape, icons ───────────── -->
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- the tooth silhouette used everywhere (200 × 260) -->
+    <path id="toothPath" d="M100 44C118 30 150 30 164 52C176 72 170 100 160 120C154 140 156 170 150 205C146 232 130 240 122 220C116 200 112 170 100 160C88 170 84 200 78 220C70 240 54 232 50 205C44 170 46 140 40 120C30 100 24 72 36 52C50 30 82 30 100 44Z"/>
+    <path id="pulpPath" d="M100 70C120 62 138 74 138 96C138 116 132 128 130 150C129 175 134 200 130 214C128 222 124 218 122 208C118 188 114 170 100 164C86 170 82 188 78 208C76 218 72 222 70 214C66 200 71 175 70 150C68 128 62 116 62 96C62 74 80 62 100 70Z"/>
 
-    <header class="header">
+    <linearGradient id="gToothSolid" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#f3f0eb"/><stop offset="1" stop-color="#d6d0c7"/>
+    </linearGradient>
+    <linearGradient id="gToothPink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#f6f1ed"/><stop offset="1" stop-color="#e59a98"/>
+    </linearGradient>
+    <linearGradient id="gToothGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".95"/><stop offset="1" stop-color="#cfd0d6" stop-opacity=".75"/>
+    </linearGradient>
+    <linearGradient id="gPulp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9c9d6"/><stop offset="1" stop-color="#a99bb0"/>
+    </linearGradient>
+    <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".85"/>
+      <stop offset=".45" stop-color="#bfcad2" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".62"/>
+    </linearGradient>
+    <linearGradient id="gPed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dcd7cf"/>
+    </linearGradient>
+    <linearGradient id="gOrbit" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c9a27a" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#ffffff" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#c9a27a" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gTan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8b894"/><stop offset="1" stop-color="#9c7a58"/>
+    </linearGradient>
+    <linearGradient id="gSilver" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9aa1a8"/><stop offset=".45" stop-color="#eef0f2"/><stop offset="1" stop-color="#8a9097"/>
+    </linearGradient>
+    <linearGradient id="gHudTooth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cfe6ee" stop-opacity=".28"/><stop offset="1" stop-color="#6e9aa8" stop-opacity=".1"/>
+    </linearGradient>
+    <linearGradient id="gScan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b9e4f2" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#e8f8ff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#b9e4f2" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="pMesh" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(24)">
+      <path d="M0 0H9M0 0V9" fill="none" stroke="#dff3fa" stroke-opacity=".38" stroke-width=".7"/>
+    </pattern>
+    <filter id="fShadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#5a4632" flood-opacity=".22"/>
+    </filter>
+    <filter id="fBlur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="fGlow" x="-20%" y="-80%" width="140%" height="260%"><feGaussianBlur stdDeviation="5"/></filter>
 
-        <div class="container nav">
+    <!-- icons -->
+    <symbol id="i-logo" viewBox="0 0 32 32">
+      <g transform="translate(5.2 1.8) scale(.11)"><use href="#toothPath" fill="none" stroke="currentColor" stroke-width="13" stroke-linejoin="round"/></g>
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 3.5V16h0A2.5 2.5 0 0 1 4 13.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="12" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2c.6 5 2.4 7.2 8 8-5.6.8-7.4 3-8 8-.6-5-2.4-7.2-8-8 5.6-.8 7.4-3 8-8z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 
-            <a href="#home" class="logo">
-                <span class="logo-icon">✦</span>
-                <span>
-                    <strong>دکتر شعله نعمتی</strong>
-                    <small>مطب دندان‌پزشکی</small>
-                </span>
-            </a>
+    <!-- service icons (64 × 64) -->
+    <symbol id="i-cosmetic" viewBox="0 0 64 64">
+      <g transform="translate(11 3) scale(.21)"><use href="#toothPath" fill="url(#gToothPink)" stroke="#dcd2c8" stroke-width="3"/></g>
+      <use href="#i-sparkle" x="41" y="4" width="17" height="17" fill="#c9a27a"/>
+    </symbol>
+    <symbol id="i-implant" viewBox="0 0 64 64">
+      <path d="M17 9h30a6 6 0 0 1 6 6v9a15 15 0 0 1-15 15H26A15 15 0 0 1 11 24v-9a6 6 0 0 1 6-6z" fill="url(#gToothSolid)" stroke="#d8d3cb" stroke-width="1.4"/>
+      <rect x="23" y="38" width="18" height="5" rx="2" fill="url(#gSilver)"/>
+      <rect x="26.5" y="42" width="11" height="17" rx="3" fill="url(#gSilver)"/>
+      <path d="M26 47h12M26 51.5h12M27 56h10" stroke="#757d85" stroke-width="1.2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-whitening" viewBox="0 0 64 64">
+      <g transform="translate(4 14) scale(.19)"><use href="#toothPath" fill="url(#gToothSolid)" stroke="#d8d3cb" stroke-width="3"/></g>
+      <g transform="translate(25 8) scale(.19)"><use href="#toothPath" fill="url(#gToothSolid)" stroke="#d8d3cb" stroke-width="3"/></g>
+      <use href="#i-sparkle" x="45" y="3" width="14" height="14" fill="#c9a27a"/>
+      <use href="#i-sparkle" x="4" y="4" width="9" height="9" fill="#dcc4a6"/>
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 64 64">
+      <path d="M32 5l22 8v17c0 14-10 24-22 29C20 54 10 44 10 30V13z" fill="url(#gTan)"/>
+      <g transform="translate(22.5 17) scale(.14)"><use href="#toothPath" fill="#fff"/></g>
+    </symbol>
+    <symbol id="i-braces" viewBox="0 0 64 64">
+      <g transform="translate(14 4) scale(.18)"><use href="#toothPath" fill="url(#gToothSolid)" stroke="#d8d3cb" stroke-width="3"/></g>
+      <path d="M3 25h58" stroke="#8a9099" stroke-width="2.2" stroke-linecap="round"/>
+      <rect x="26" y="20.5" width="12" height="9" rx="2.4" fill="#d5dade" stroke="#8a9099" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="i-root" viewBox="0 0 64 64">
+      <g transform="translate(14 4) scale(.18)">
+        <use href="#toothPath" fill="url(#gToothSolid)" stroke="#bdb7ae" stroke-width="3"/>
+        <use href="#pulpPath" fill="url(#gPulp)" stroke="#8d7f96" stroke-width="3"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
 
+<!-- ───────────── Header ───────────── -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="#home" aria-label="PureDental — home">
+      <svg class="brand-mark" aria-hidden="true"><use href="#i-logo"/></svg>
+      <span class="brand-text"><strong>PureDental</strong><small>Dental Clinic</small></span>
+    </a>
 
-            <nav class="nav-links" id="navLinks">
+    <nav class="nav" id="nav" aria-label="Main navigation">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#treatments" data-nav="treatments">Treatments</a>
+      <a href="#technology" data-nav="technology">Technology</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+      <button class="btn btn-tan btn-sm nav-cta" type="button" data-open-booking>Book Consultation</button>
+    </nav>
 
-                <a href="#home">خانه</a>
+    <div class="header-actions">
+      <button class="btn btn-tan btn-sm header-cta" type="button" data-open-booking>Consultation</button>
+      <button class="icon-btn" id="searchBtn" type="button" aria-label="Search the site" aria-expanded="false" aria-controls="searchPanel">
+        <svg aria-hidden="true"><use href="#i-search"/></svg>
+      </button>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <svg aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
 
-                <a href="#about">درباره ما</a>
+  <div class="search-panel" id="searchPanel" hidden>
+    <div class="container">
+      <form class="search-form" id="searchForm" role="search" autocomplete="off">
+        <svg aria-hidden="true"><use href="#i-search"/></svg>
+        <input id="searchInput" type="search" placeholder="Search treatments, technology, contact…" aria-label="Search the site">
+      </form>
+      <ul class="search-results" id="searchResults"></ul>
+    </div>
+  </div>
+</header>
 
-                <a href="#services">خدمات</a>
+<!-- section dots (desktop) -->
+<nav class="dots-nav" aria-label="Page sections">
+  <a href="#home" data-nav="home" aria-label="Home"></a>
+  <a href="#treatments" data-nav="treatments" aria-label="Treatments"></a>
+  <a href="#technology" data-nav="technology" aria-label="Technology"></a>
+  <a href="#about" data-nav="about" aria-label="About"></a>
+  <a href="#contact" data-nav="contact" aria-label="Contact"></a>
+</nav>
 
-                <a href="#results">قبل و بعد</a>
+<main>
 
-                <a href="#appointment">دریافت نوبت</a>
+<!-- ───────────── Hero ───────────── -->
+<section class="hero" id="home" data-section>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <h1 class="reveal">A Better Smile<br>Begins Here.</h1>
+      <p class="lead reveal" style="--d:.1s">Advanced dental care with precision, comfort and modern technology.</p>
+      <div class="reveal" style="--d:.2s">
+        <button class="btn btn-tan" type="button" data-open-booking>Book Consultation <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+    </div>
 
-            </nav>
+    <div class="hero-stage reveal" style="--d:.15s" id="heroStage">
+      <svg class="stage-svg" viewBox="0 70 420 380" role="img" aria-label="A tooth displayed under a glass dome">
+        <!-- ground shadow + pedestal -->
+        <ellipse cx="210" cy="424" rx="175" ry="24" fill="#5a4632" opacity=".16" filter="url(#fBlur)"/>
+        <ellipse cx="210" cy="404" rx="162" ry="30" fill="url(#gPed)"/>
+        <ellipse cx="210" cy="394" rx="134" ry="20" fill="#fff"/>
 
+        <ellipse cx="210" cy="391" rx="66" ry="8" fill="#5a4632" opacity=".22" filter="url(#fBlur)"/>
 
-            <a href="#appointment" class="nav-button">
-                درخواست نوبت
-            </a>
+        <!-- dome tint (behind the tooth) -->
+        <path d="M100 394V226C100 140 150 94 210 94C270 94 320 140 320 226V394A110 18 0 0 1 100 394Z" fill="url(#gGlass)"/>
 
+        <!-- tooth -->
+        <g transform="translate(120 122) scale(.9)">
+          <g class="tooth-float" filter="url(#fShadow)">
+            <g class="tooth-solid">
+              <use href="#toothPath" fill="url(#gToothSolid)" stroke="#e4dfd8" stroke-width="1.5"/>
+              <path d="M62 60C76 46 98 46 110 58" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".9"/>
+              <path d="M52 90C50 112 58 130 66 142" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".6"/>
+            </g>
+            <g class="tooth-anatomy">
+              <use href="#toothPath" fill="url(#gToothGlass)" stroke="#8d8a96" stroke-width="2.2"/>
+              <g transform="translate(100 150) scale(.86) translate(-100 -150)">
+                <use href="#toothPath" fill="none" stroke="#b9b4c0" stroke-width="2"/>
+              </g>
+              <use href="#pulpPath" fill="url(#gPulp)" stroke="#6f6679" stroke-width="2.4"/>
+              <path d="M100 120V160M118 112C124 130 124 148 122 170M82 112C76 130 76 148 78 170" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
+            </g>
+          </g>
+        </g>
 
-            <button class="menu-toggle" id="menuToggle">
-                ☰
-            </button>
+        <!-- glass dome -->
+        <path d="M100 394V226C100 140 150 94 210 94C270 94 320 140 320 226V394A110 18 0 0 1 100 394Z" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="2"/>
+        <path d="M100 394V226C100 140 150 94 210 94C270 94 320 140 320 226V394A110 18 0 0 1 100 394Z" fill="none" stroke="#8f8579" stroke-opacity=".4" stroke-width="1.2"/>
+        <path d="M117 236C117 172 144 126 184 110" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".85"/>
+        <path d="M303 206C299 176 289 152 272 134" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/>
 
+        <!-- orbit rings -->
+        <g transform="rotate(-13 210 250)">
+          <ellipse cx="210" cy="250" rx="200" ry="46" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.2"/>
+          <ellipse class="orbit-light" cx="210" cy="250" rx="200" ry="46" fill="none" stroke="url(#gOrbit)" stroke-width="3" stroke-linecap="round" pathLength="100" stroke-dasharray="26 74"/>
+        </g>
+        <g transform="rotate(9 210 262)">
+          <ellipse cx="210" cy="262" rx="176" ry="34" fill="none" stroke="#c9a27a" stroke-opacity=".35" stroke-width="1"/>
+        </g>
+
+        <!-- motes -->
+        <g fill="#c9a27a">
+          <circle class="mote" cx="74" cy="150" r="2.4" style="--t:3.2s"/>
+          <circle class="mote" cx="352" cy="214" r="2" style="--t:4.1s"/>
+          <circle class="mote" cx="318" cy="92" r="1.8" style="--t:2.7s"/>
+          <circle class="mote" cx="44" cy="296" r="1.6" style="--t:3.6s"/>
+        </g>
+      </svg>
+
+      <div class="float-card fc-1">
+        <span class="fc-ico"><svg aria-hidden="true"><use href="#i-sparkle"/></svg></span>
+        <div><strong>Modern Care</strong><small>Digital Smile Design</small></div>
+      </div>
+      <div class="float-card fc-2">
+        <span class="fc-ico"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+        <div><strong>Gentle Care</strong><small>Lasting Smiles</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── Treatments ───────────── -->
+<section class="services section" id="treatments" data-section>
+  <div class="container">
+    <h2 class="section-title reveal">Dental Services</h2>
+
+    <div class="carousel reveal" data-carousel style="--d:.1s">
+      <button class="car-btn prev" type="button" aria-label="Previous services"><svg aria-hidden="true"><use href="#i-left"/></svg></button>
+      <div class="car-track" tabindex="0" aria-label="Dental services">
+        <article class="svc-card">
+          <div class="svc-ico"><svg aria-hidden="true"><use href="#i-cosmetic"/></svg></div>
+          <h3>Cosmetic Dentistry</h3>
+          <p>Natural-looking veneers, bonding and smile design shaped around your face.</p>
+          <a class="svc-link" href="#contact">Learn more <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </article>
+        <article class="svc-card">
+          <div class="svc-ico"><svg aria-hidden="true"><use href="#i-implant"/></svg></div>
+          <h3>Dental Implants</h3>
+          <p>Permanent, comfortable tooth replacement planned with digital precision.</p>
+          <a class="svc-link" href="#contact">Learn more <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </article>
+        <article class="svc-card">
+          <div class="svc-ico"><svg aria-hidden="true"><use href="#i-whitening"/></svg></div>
+          <h3>Teeth Whitening</h3>
+          <p>Professional whitening for a visibly brighter smile, done safely in one visit.</p>
+          <a class="svc-link" href="#contact">Learn more <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </article>
+        <article class="svc-card">
+          <div class="svc-ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></div>
+          <h3>Preventive Care</h3>
+          <p>Check-ups, cleanings and early detection that keep your smile healthy for life.</p>
+          <a class="svc-link" href="#contact">Learn more <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </article>
+        <article class="svc-card">
+          <div class="svc-ico"><svg aria-hidden="true"><use href="#i-braces"/></svg></div>
+          <h3>Orthodontics</h3>
+          <p>Clear aligners and modern braces for a confident, well-aligned smile.</p>
+          <a class="svc-link" href="#contact">Learn more <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </article>
+        <article class="svc-card">
+          <div class="svc-ico"><svg aria-hidden="true"><use href="#i-root"/></svg></div>
+          <h3>Root Canal Therapy</h3>
+          <p>Gentle, carefully managed treatment that saves your natural tooth.</p>
+          <a class="svc-link" href="#contact">Learn more <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </article>
+      </div>
+      <button class="car-btn next" type="button" aria-label="Next services"><svg aria-hidden="true"><use href="#i-right"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── Technology ───────────── -->
+<section class="tech" id="technology" data-section>
+  <svg class="tech-ghost" viewBox="0 0 600 300" aria-hidden="true">
+    <g fill="#fff" opacity=".035">
+      <g transform="translate(20 60) scale(.8)"><use href="#toothPath"/></g>
+      <g transform="translate(200 120) scale(.6)"><use href="#toothPath"/></g>
+      <g transform="translate(330 70) scale(.7)"><use href="#toothPath"/></g>
+    </g>
+  </svg>
+
+  <div class="container tech-grid">
+    <div class="tech-copy">
+      <p class="eyebrow eyebrow-tan reveal">Premium Technology</p>
+      <h2 class="reveal" style="--d:.05s">Precision<br>Technology</h2>
+      <p class="lead reveal" style="--d:.1s">3D digital scanning, guided planning and modern imaging — so you can see your result before we begin.</p>
+      <div class="reveal" style="--d:.15s">
+        <button class="btn btn-tan" type="button" data-open-booking>Book Consultation <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+      <div class="tech-dots" role="tablist" aria-label="Technology slides">
+        <button type="button" role="tab" class="is-active" aria-label="3D tooth mapping"></button>
+        <button type="button" role="tab" aria-label="Smile analysis"></button>
+        <button type="button" role="tab" aria-label="Digital X-ray"></button>
+      </div>
+    </div>
+
+    <div class="slider reveal" data-slider style="--d:.1s">
+      <!-- slide 1: 3D tooth HUD -->
+      <div class="slide is-active">
+        <svg class="hud" viewBox="0 0 640 440" role="img" aria-label="Wireframe 3D scan of a tooth">
+          <defs>
+            <clipPath id="cHud"><use href="#toothPath" transform="translate(204 70) scale(1.12)"/></clipPath>
+          </defs>
+          <!-- ruler -->
+          <line x1="72" y1="62" x2="72" y2="378" stroke="#8fb4c0" stroke-opacity=".6" stroke-width="12" stroke-dasharray="1 9"/>
+          <line x1="86" y1="62" x2="86" y2="378" stroke="#8fb4c0" stroke-opacity=".25" stroke-width="1"/>
+          <text x="96" y="70" class="hud-text">0.0 mm</text>
+          <text x="96" y="378" class="hud-text">12.4 mm</text>
+          <!-- tooth -->
+          <g transform="translate(204 70) scale(1.12)">
+            <use href="#toothPath" fill="url(#gHudTooth)" stroke="#dff3fa" stroke-opacity=".85" stroke-width="1.4"/>
+            <use href="#toothPath" fill="url(#pMesh)"/>
+          </g>
+          <g clip-path="url(#cHud)" fill="none" stroke="#dff3fa" stroke-opacity=".4" stroke-width=".8">
+            <path d="M200 120Q320 140 440 120M200 150Q320 172 440 150M200 180Q320 204 440 180M200 210Q320 234 440 210M200 240Q320 262 440 240M200 270Q320 290 440 270M200 300Q320 316 440 300M200 330Q320 342 440 330"/>
+            <path d="M320 60C300 140 300 240 320 340M270 70C250 150 258 250 276 340M370 70C390 150 382 250 364 340"/>
+          </g>
+          <rect class="scan-line" x="170" y="70" width="300" height="3" fill="url(#gScan)"/>
+          <rect class="scan-glow" x="170" y="62" width="300" height="20" fill="url(#gScan)" opacity=".25" filter="url(#fGlow)"/>
+          <!-- HUD panels -->
+          <g fill="none" stroke="#8fb4c0" stroke-opacity=".55">
+            <rect x="476" y="52" width="124" height="124" rx="8"/>
+            <rect x="476" y="204" width="124" height="124" rx="8"/>
+          </g>
+          <g transform="translate(538 114)" fill="none" stroke="#a9d3e0">
+            <circle r="42" stroke-opacity=".5"/><circle r="28" stroke-opacity=".5"/><circle r="14" stroke-opacity=".6"/>
+            <path d="M-42 0H42M0 -42V42" stroke-opacity=".18"/>
+            <g class="radar"><path d="M0 -42A42 42 0 0 1 36 -21" stroke-width="3" stroke-linecap="round" stroke="#e8f8ff"/></g>
+          </g>
+          <g transform="translate(508 214) scale(.3)"><use href="#toothPath" fill="url(#gHudTooth)" stroke="#dff3fa" stroke-width="3"/></g>
+          <g stroke="#8fb4c0" stroke-opacity=".6" stroke-linecap="round" stroke-width="2"><path d="M490 312h50M490 320h78"/></g>
+          <text x="476" y="368" class="hud-text">ENAMEL · 98%</text>
+          <text x="476" y="384" class="hud-text">SCAN 03 / 12</text>
+          <!-- corner brackets -->
+          <path d="M34 34V16h18M606 34V16h-18M606 406v18h-18" fill="none" stroke="#a9d3e0" stroke-opacity=".6" stroke-width="1.5"/>
+        </svg>
+        <span class="slide-label">3D Tooth Mapping</span>
+      </div>
+
+      <!-- slide 2: smile analysis -->
+      <div class="slide">
+        <div class="scan-frame">
+          <img src="assets/smile.svg" alt="Digital smile analysis">
+          <img class="scan-overlay" src="assets/smile.svg" alt="" aria-hidden="true">
+          <span class="scan-bar"></span>
+          <span class="corner c-tl"></span><span class="corner c-br"></span>
         </div>
-
-    </header>
-
-
-
-    <!-- HERO -->
-
-    <main>
-
-        <section class="hero" id="home">
-
-            <div class="hero-content container">
-
-                <div class="hero-text">
-
-                    <span class="eyebrow">
-                        مراقبت حرفه‌ای از لبخند شما
-                    </span>
-
-                    <h1>
-                        لبخند زیبا
-                        <br>
-                        از اینجا آغاز می‌شود.
-                    </h1>
-
-                    <p>
-                        در مطب دکتر شعله نعمتی، سلامت و زیبایی لبخند شما
-                        با توجه به نیازهای دندان‌پزشکی‌تان مورد توجه قرار می‌گیرد.
-                    </p>
-
-                    <div class="hero-actions">
-
-                        <a href="#appointment" class="primary-button">
-                            درخواست نوبت
-                        </a>
-
-                        <a href="#services" class="secondary-button">
-                            مشاهده خدمات
-                        </a>
-
-                    </div>
-
-                    <div class="hero-note">
-                        ✦ توجه به سلامت و زیبایی لبخند شما
-                    </div>
-
-                </div>
-
-
-
-                <div class="hero-visual">
-
-                    <div class="tooth-glass">
-
-                        <div class="glass-orbit orbit-one"></div>
-
-                        <div class="glass-orbit orbit-two"></div>
-
-                        <div id="tooth3D" class="tooth-3d">
-
-                            <div class="tooth-loading">
-                                در حال بارگذاری مدل سه‌بعدی...
-                            </div>
-
-                        </div>
-
-                        <div class="glass-reflection"></div>
-
-                    </div>
-
-
-                    <div class="tooth-base"></div>
-
-
-                    <div class="visual-caption">
-
-                        <span>✦</span>
-
-                        <div>
-                            <strong>طراحی لبخند</strong>
-                            <small>سلامت، زیبایی و مراقبت</small>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="hero-bottom">
-                <span>SCROLL TO EXPLORE</span>
-                <span class="scroll-line"></span>
-            </div>
-
-        </section>
-
-
-
-        <!-- ABOUT -->
-
-        <section class="about section-padding" id="about">
-
-            <div class="container about-grid">
-
-                <div class="about-decoration">
-                    <span>DR.</span>
-                    <strong>SN</strong>
-                </div>
-
-
-                <div class="about-content">
-
-                    <span class="eyebrow">
-                        درباره مطب
-                    </span>
-
-                    <h2>
-                        مراقبت از لبخند،
-                        <br>
-                        با توجه به جزئیات
-                    </h2>
-
-                    <p>
-                        در مطب دکتر شعله نعمتی، هدف ارائه خدمات دندان‌پزشکی
-                        با توجه به شرایط و نیازهای هر مراجعه‌کننده است.
-                        انتخاب روش درمان پس از معاینه و بررسی وضعیت دهان و دندان انجام می‌شود.
-                    </p>
-
-                    <a href="#appointment" class="text-link">
-                        ارتباط با مطب ←
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- SERVICES -->
-
-        <section class="services section-padding" id="services">
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <span class="eyebrow">
-                        خدمات دندان‌پزشکی
-                    </span>
-
-                    <h2>
-                        خدمات متناسب با نیاز لبخند شما
-                    </h2>
-
-                    <p>
-                        هر درمان پس از معاینه و بررسی شرایط بیمار انتخاب می‌شود.
-                    </p>
-
-                </div>
-
-
-                <div class="services-grid">
-
-
-                    <article class="service-card">
-
-                        <span class="service-number">01</span>
-
-                        <div class="service-icon">✧</div>
-
-                        <h3>دندان‌پزشکی زیبایی</h3>
-
-                        <p>
-                            خدمات زیبایی با توجه به شرایط دندان‌ها و خواسته مراجعه‌کننده.
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="service-card">
-
-                        <span class="service-number">02</span>
-
-                        <div class="service-icon">◇</div>
-
-                        <h3>ترمیم دندان</h3>
-
-                        <p>
-                            بررسی و ترمیم دندان‌های آسیب‌دیده و پوسیده.
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="service-card">
-
-                        <span class="service-number">03</span>
-
-                        <div class="service-icon">◈</div>
-
-                        <h3>درمان ریشه</h3>
-
-                        <p>
-                            بررسی مشکلات پالپ دندان و انجام درمان ریشه در صورت نیاز.
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="service-card">
-
-                        <span class="service-number">04</span>
-
-                        <div class="service-icon">✦</div>
-
-                        <h3>ایمپلنت دندان</h3>
-
-                        <p>
-                            بررسی شرایط جایگزینی دندان ازدست‌رفته با ایمپلنت.
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="service-card">
-
-                        <span class="service-number">05</span>
-
-                        <div class="service-icon">◎</div>
-
-                        <h3>جرم‌گیری و مراقبت</h3>
-
-                        <p>
-                            مراقبت‌های پیشگیرانه برای حفظ سلامت دهان و دندان.
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="service-card">
-
-                        <span class="service-number">06</span>
-
-                        <div class="service-icon">＋</div>
-
-                        <h3>مشاوره دندان‌پزشکی</h3>
-
-                        <p>
-                            بررسی وضعیت دندان‌ها و پیشنهاد مسیر درمان مناسب.
-                        </p>
-
-                    </article>
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- BEFORE AND AFTER -->
-
-        <section class="results section-padding" id="results">
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <span class="eyebrow">
-                        تفاوت یک ترمیم اصولی
-                    </span>
-
-                    <h2>
-                        بازگشت زیبایی به لبخند شما
-                    </h2>
-
-                    <p>
-                        نمونه شماتیک از تفاوت ظاهر دندان قبل و بعد از ترمیم.
-                    </p>
-
-                </div>
-
-
-                <div class="comparison">
-
-                    <div class="comparison-side before">
-                        <span>قبل از ترمیم</span>
-                        <div class="comparison-tooth damaged">✦</div>
-                    </div>
-
-
-                    <div class="comparison-side after">
-                        <span>بعد از ترمیم</span>
-                        <div class="comparison-tooth restored">✦</div>
-                    </div>
-
-                </div>
-
-
-                <p class="comparison-note">
-                    تصاویر نمایشی هستند و نتیجه واقعی درمان را نشان نمی‌دهند.
-                </p>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- APPOINTMENT -->
-
-        <section class="appointment section-padding" id="appointment">
-
-            <div class="container appointment-grid">
-
-                <div class="appointment-info">
-
-                    <span class="eyebrow">
-                        رزرو و درخواست نوبت
-                    </span>
-
-                    <h2>
-                        برای لبخندتان
-                        <br>
-                        وقت بگذارید.
-                    </h2>
-
-                    <p>
-                        اطلاعات خود را ثبت کنید تا درخواست نوبت شما آماده شود.
-                    </p>
-
-                    <div class="appointment-decoration">
-                        DR. SHOLEH NEMATI
-                    </div>
-
-                </div>
-
-
-
-                <form class="appointment-form" id="appointmentForm">
-
-                    <div class="form-row">
-
-                        <div class="form-group">
-
-                            <label for="name">نام و نام خانوادگی</label>
-
-                            <input
-                                type="text"
-                                id="name"
-                                placeholder="نام شما"
-                                required>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="phone">شماره موبایل</label>
-
-                            <input
-                                type="tel"
-                                id="phone"
-                                placeholder="09xxxxxxxxx"
-                                required>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="form-row">
-
-                        <div class="form-group">
-
-                            <label for="service">نوع خدمات</label>
-
-                            <select id="service" required>
-
-                                <option value="">انتخاب خدمات</option>
-
-                                <option>دندان‌پزشکی زیبایی</option>
-
-                                <option>ترمیم دندان</option>
-
-                                <option>درمان ریشه</option>
-
-                                <option>ایمپلنت</option>
-
-                                <option>جرم‌گیری</option>
-
-                                <option>مشاوره</option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="date">تاریخ پیشنهادی</label>
-
-                            <input
-                                type="date"
-                                id="date"
-                                required>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label for="message">توضیحات بیشتر</label>
-
-                        <textarea
-                            id="message"
-                            rows="4"
-                            placeholder="در صورت تمایل توضیح دهید..."></textarea>
-
-                    </div>
-
-
-
-                    <button type="submit" class="primary-button form-submit">
-                        ثبت درخواست نوبت
-                    </button>
-
-
-                    <p class="form-message" id="formMessage"></p>
-
-                    <small class="form-disclaimer">
-                        این فرم در حال حاضر درخواست را فقط در همین مرورگر ذخیره می‌کند
-                        و هنوز به مطب ارسال نمی‌کند.
-                    </small>
-
-                </form>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- CONTACT -->
-
-        <section class="contact section-padding" id="contact">
-
-            <div class="container contact-content">
-
-                <span class="eyebrow">
-                    ارتباط با مطب
-                </span>
-
-                <h2>
-                    دکتر شعله نعمتی
-                </h2>
-
-                <p>
-                    برای دریافت اطلاعات تماس و نشانی مطب، این بخش بعداً تکمیل می‌شود.
-                </p>
-
-            </div>
-
-        </section>
-
-
-    </main>
-
-
-
-    <!-- FOOTER -->
-
-    <footer class="footer">
-
-        <div class="container footer-content">
-
-            <div>
-                <strong>دکتر شعله نعمتی</strong>
-                <p>مطب دندان‌پزشکی</p>
-            </div>
-
-            <span>
-                © تمامی حقوق محفوظ است.
-            </span>
-
+        <span class="slide-label">Smile Analysis</span>
+      </div>
+
+      <!-- slide 3: digital X-ray -->
+      <div class="slide">
+        <svg class="hud" viewBox="0 0 640 440" role="img" aria-label="Digital X-ray of the teeth">
+          <g stroke="#8fb4c0" stroke-opacity=".14">
+            <path d="M0 110H640M0 220H640M0 330H640M107 0V440M213 0V440M320 0V440M427 0V440M533 0V440" fill="none"/>
+          </g>
+          <g fill="url(#gHudTooth)" stroke="#e3d2bb" stroke-opacity=".8" stroke-width="2.4">
+            <g transform="translate(62 128) scale(.46) rotate(-14 100 130)"><use href="#toothPath"/></g>
+            <g transform="translate(128 112) scale(.5) rotate(-9 100 130)"><use href="#toothPath"/></g>
+            <g transform="translate(200 100) scale(.52) rotate(-5 100 130)"><use href="#toothPath"/></g>
+            <g transform="translate(274 96) scale(.54)"><use href="#toothPath"/></g>
+            <g transform="translate(348 100) scale(.52) rotate(5 100 130)"><use href="#toothPath"/></g>
+            <g transform="translate(420 112) scale(.5) rotate(9 100 130)"><use href="#toothPath"/></g>
+            <g transform="translate(486 128) scale(.46) rotate(14 100 130)"><use href="#toothPath"/></g>
+          </g>
+          <g fill="url(#gPulp)" opacity=".55" stroke="#e3d2bb" stroke-opacity=".5" stroke-width="1.2">
+            <g transform="translate(274 96) scale(.54)"><use href="#pulpPath"/></g>
+            <g transform="translate(200 100) scale(.52) rotate(-5 100 130)"><use href="#pulpPath"/></g>
+            <g transform="translate(348 100) scale(.52) rotate(5 100 130)"><use href="#pulpPath"/></g>
+          </g>
+          <path d="M60 300C200 340 440 340 580 300" fill="none" stroke="#e3d2bb" stroke-opacity=".5" stroke-width="1.4" stroke-dasharray="3 6"/>
+          <text x="60" y="372" class="hud-text">PANORAMIC · 100% VISIBLE</text>
+          <rect class="scan-line scan-v" x="60" y="70" width="3" height="260" fill="url(#gScan)"/>
+        </svg>
+        <span class="slide-label">Digital X-Ray</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── Smile transformation / About ───────────── -->
+<section class="transform section" id="about" data-section>
+  <div class="container">
+    <h2 class="section-title reveal">Smile Transformation</h2>
+    <p class="section-sub reveal" style="--d:.05s">A calm, considered approach — from your first visit to the final result.</p>
+
+    <div class="glass-grid">
+      <article class="glass-card reveal" data-tilt>
+        <h3>Comfort</h3>
+        <div class="gc-art">
+          <img src="assets/smile.svg" alt="" aria-hidden="true" class="gc-smile">
+          <svg class="gc-ring" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="12" fill="none" stroke="#fff" stroke-width="6"/><circle cx="20" cy="20" r="12" fill="none" stroke="#cfd3d8" stroke-width="6" stroke-dasharray="20 60"/></svg>
         </div>
+        <p>Calm spaces, gentle techniques and unhurried visits that put you at ease.</p>
+        <a class="pill-dark" href="#contact">Learn more <svg aria-hidden="true"><use href="#i-right"/></svg></a>
+      </article>
 
-    </footer>
+      <article class="glass-card is-featured reveal" data-tilt style="--d:.1s">
+        <h3>Precision</h3>
+        <div class="gc-art">
+          <div class="lens">
+            <svg viewBox="0 0 200 260" aria-hidden="true">
+              <use href="#toothPath" fill="url(#gToothPink)" stroke="#d9cfc6" stroke-width="3"/>
+              <use href="#pulpPath" fill="url(#gPulp)" opacity=".6"/>
+            </svg>
+          </div>
+        </div>
+        <p>Digital planning and imaging guide every step, for accuracy you can see.</p>
+        <a class="pill-dark" href="#contact">Learn more <svg aria-hidden="true"><use href="#i-right"/></svg></a>
+      </article>
 
+      <article class="glass-card reveal" data-tilt style="--d:.2s">
+        <h3>Personalized Care</h3>
+        <div class="gc-art">
+          <svg class="gc-tooth" viewBox="0 0 200 260" aria-hidden="true">
+            <use href="#toothPath" fill="url(#gToothSolid)" stroke="#e4dfd8" stroke-width="2"/>
+            <path d="M62 60C76 46 98 46 110 58" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".9"/>
+          </svg>
+        </div>
+        <p>A treatment plan shaped around your face, your goals and your schedule.</p>
+        <a class="pill-dark" href="#contact">Learn more <svg aria-hidden="true"><use href="#i-right"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
 
+<!-- ───────────── Premium CTA / Contact ───────────── -->
+<section class="cta" id="contact" data-section>
+  <div class="cta-bg" aria-hidden="true"><img src="assets/smile.svg" alt=""></div>
+  <div class="cta-overlay" aria-hidden="true"></div>
 
-    <script src="js/script.js"></script>
+  <div class="container cta-inner">
+    <p class="eyebrow reveal">Premium Dental Clinic</p>
+    <h2 class="reveal" style="--d:.05s">Your Smile. Our Precision.</h2>
+    <p class="cta-sub reveal" style="--d:.1s">Book Your Consultation</p>
+    <div class="reveal" style="--d:.15s">
+      <button class="btn btn-glass btn-lg" type="button" data-open-booking>Book Your Consultation <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    </div>
 
-    <script type="module" src="js/tooth.js"></script>
+    <svg class="cta-arc reveal" viewBox="0 0 900 150" aria-hidden="true" style="--d:.3s">
+      <defs>
+        <linearGradient id="gArc" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#f3dcb8" stop-opacity="0"/>
+          <stop offset=".18" stop-color="#f6e2c0"/>
+          <stop offset=".5" stop-color="#fff6e6"/>
+          <stop offset=".82" stop-color="#f6e2c0"/>
+          <stop offset="1" stop-color="#f3dcb8" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path class="arc-glow" d="M30 24C230 150 670 150 870 24" fill="none" stroke="#ffe3b0" stroke-width="9" opacity=".55" filter="url(#fGlow)" pathLength="1"/>
+      <path class="arc-line" d="M30 24C230 150 670 150 870 24" fill="none" stroke="url(#gArc)" stroke-width="3" stroke-linecap="round" pathLength="1"/>
+      <circle class="arc-end" cx="30" cy="24" r="4" fill="#fff6e6"/>
+      <circle class="arc-end" cx="870" cy="24" r="4" fill="#fff6e6"/>
+      <g fill="#fff3da">
+        <use class="spark" href="#i-sparkle" x="190" y="92" width="12" height="12" style="--t:2.4s"/>
+        <use class="spark" href="#i-sparkle" x="330" y="112" width="9" height="9" style="--t:3.1s"/>
+        <use class="spark" href="#i-sparkle" x="560" y="112" width="10" height="10" style="--t:2.8s"/>
+        <use class="spark" href="#i-sparkle" x="700" y="90" width="13" height="13" style="--t:3.4s"/>
+      </g>
+    </svg>
+  </div>
+</section>
 
+</main>
+
+<!-- ───────────── Footer ───────────── -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <strong>PureDental Clinic</strong>
+      <p>Precision dentistry, delivered with comfort.</p>
+      <ul class="contact-list">
+        <li data-site-row="phone" hidden>Phone: <a data-site-link="tel" href="#"><span data-site="phone"></span></a></li>
+        <li data-site-row="email" hidden>Email: <a data-site-link="mailto" href="#"><span data-site="email"></span></a></li>
+        <li data-site-row="address" hidden><span data-site="address"></span></li>
+        <li data-site-row="hours" hidden><span data-site="hours"></span></li>
+      </ul>
+    </div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="#home">Home</a>
+      <a href="#treatments">Treatments</a>
+      <a href="#technology">Technology</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="footer-cta">
+      <button class="btn btn-tan btn-sm" type="button" data-open-booking>Book Consultation</button>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="year">2026</span> PureDental Clinic</span>
+    <span class="sep" aria-hidden="true">|</span>
+    <span>All rights reserved</span>
+    <span class="sep" aria-hidden="true">|</span>
+    <span>Designed for a brighter smile</span>
+  </div>
+</footer>
+
+<!-- floating chat button -->
+<button class="chat-fab" id="chatFab" type="button" aria-label="Chat with us">
+  <svg aria-hidden="true"><use href="#i-chat"/></svg>
+</button>
+
+<!-- ───────────── Booking modal ───────────── -->
+<div class="modal" id="booking" role="dialog" aria-modal="true" aria-labelledby="bookingTitle" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel">
+    <button class="modal-close" type="button" data-close aria-label="Close"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+    <h3 id="bookingTitle">Book a Consultation</h3>
+    <p class="modal-sub">Leave your details and we will confirm your visit.</p>
+    <form id="bookingForm" novalidate>
+      <label>Full name
+        <input name="name" type="text" autocomplete="name" required placeholder="Your name">
+      </label>
+      <label>Phone
+        <input name="phone" type="tel" autocomplete="tel" required placeholder="Your phone number">
+      </label>
+      <div class="row-2">
+        <label>Treatment
+          <select name="service">
+            <option>General consultation</option>
+            <option>Cosmetic Dentistry</option>
+            <option>Dental Implants</option>
+            <option>Teeth Whitening</option>
+            <option>Preventive Care</option>
+            <option>Orthodontics</option>
+            <option>Root Canal Therapy</option>
+          </select>
+        </label>
+        <label>Preferred date
+          <input name="date" type="date">
+        </label>
+      </div>
+      <label><span>Message <span class="opt">(optional)</span></span>
+        <textarea name="message" rows="3" placeholder="Anything we should know?"></textarea>
+      </label>
+      <p class="form-note" id="formNote" role="status" aria-live="polite"></p>
+      <button class="btn btn-tan btn-block" type="submit">Send request</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
 </body>
-
 </html>

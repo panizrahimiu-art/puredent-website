@@ -1,335 +1,641 @@
-/* ==========================================================================
-   PureDental — interactions
-   (no libraries, no build step — plain JavaScript)
-   ========================================================================== */
+/* =========================================
+   Dr. Sholeh Nemati — Main JavaScript
+   ========================================= */
+
 (() => {
-  'use strict';
+  "use strict";
 
   const SITE = window.SITE_CONFIG || {};
-  const $ = (sel, ctx = document) => ctx.querySelector(sel);
-  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Site settings (footer contact details) ---------- */
-  const year = $('#year');
-  if (year) year.textContent = new Date().getFullYear();
+  const $ = (selector, context = document) =>
+    context.querySelector(selector);
 
-  ['phone', 'email', 'address', 'hours'].forEach((key) => {
-    const value = (SITE[key] || '').trim();
-    const row = $(`[data-site-row="${key}"]`);
-    if (!row) return;
-    if (!value) return; // stays hidden
-    $('[data-site="' + key + '"]', row).textContent = value;
-    const link = $('[data-site-link]', row);
-    if (link) {
-      link.href = link.dataset.siteLink === 'tel'
-        ? 'tel:' + value.replace(/[^\d+]/g, '')
-        : 'mailto:' + value;
-    }
-    row.hidden = false;
-  });
+  const $$ = (selector, context = document) =>
+    Array.from(context.querySelectorAll(selector));
 
-  /* ---------- Header state, floating button ---------- */
-  const header = $('#siteHeader');
-  const chatFab = $('#chatFab');
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  /* ---------- Current year ---------- */
+
+  const year = $("#year");
+
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
+
+  /* ---------- Header ---------- */
+
+  const header = $("#siteHeader");
+  const chatFab = $("#chatFab");
+
   const onScroll = () => {
     const y = window.scrollY;
-    header.classList.toggle('is-scrolled', y > 40);
-    chatFab.classList.toggle('show', y > window.innerHeight * 0.6);
+
+    if (header) {
+      header.classList.toggle("is-scrolled", y > 40);
+    }
+
+    if (chatFab) {
+      chatFab.classList.toggle(
+        "show",
+        y > window.innerHeight * 0.6
+      );
+    }
   };
-  window.addEventListener('scroll', onScroll, { passive: true });
+
+  window.addEventListener("scroll", onScroll, {
+    passive: true
+  });
+
   onScroll();
 
   /* ---------- Mobile menu ---------- */
-  const nav = $('#nav');
-  const menuBtn = $('#menuBtn');
+
+  const nav = $("#nav");
+  const menuBtn = $("#menuBtn");
+
   const setMenu = (open) => {
-    nav.classList.toggle('open', open);
-    menuBtn.setAttribute('aria-expanded', String(open));
-    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    menuBtn.firstElementChild.firstElementChild.setAttribute('href', open ? '#i-close' : '#i-menu');
+    if (!nav || !menuBtn) return;
+
+    nav.classList.toggle("open", open);
+
+    menuBtn.setAttribute(
+      "aria-expanded",
+      String(open)
+    );
+
+    menuBtn.setAttribute(
+      "aria-label",
+      open ? "بستن منو" : "باز کردن منو"
+    );
+
+    const icon = $("use", menuBtn);
+
+    if (icon) {
+      icon.setAttribute(
+        "href",
+        open ? "#i-close" : "#i-menu"
+      );
+    }
   };
-  menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
-  $$('a', nav).forEach((a) => a.addEventListener('click', () => setMenu(false)));
-  $('.nav-cta').addEventListener('click', () => setMenu(false));
 
-  /* ---------- Active section in menu + side dots ---------- */
-  const navLinks = $$('[data-nav]');
-  const sections = $$('[data-section]');
-  if ('IntersectionObserver' in window) {
-    const spy = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach((a) => a.classList.toggle('is-active', a.dataset.nav === entry.target.id));
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    sections.forEach((s) => spy.observe(s));
-  }
-
-  /* ---------- Reveal on scroll ---------- */
-  const revealEls = $$('.reveal');
-  if ('IntersectionObserver' in window && !reduceMotion) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    revealEls.forEach((el) => io.observe(el));
-  } else {
-    revealEls.forEach((el) => el.classList.add('in'));
-  }
-
-  /* ---------- Hero: tooth ↔ anatomy cross-fade + gentle parallax ---------- */
-  const stage = $('#heroStage');
-  if (stage && !reduceMotion) {
-    setInterval(() => stage.classList.toggle('is-anatomy'), 4800);
-    const hero = $('#home');
-    hero.addEventListener('pointermove', (e) => {
-      const r = hero.getBoundingClientRect();
-      hero.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
-      hero.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+  if (menuBtn && nav) {
+    menuBtn.addEventListener("click", () => {
+      setMenu(!nav.classList.contains("open"));
     });
-    hero.addEventListener('pointerleave', () => {
-      hero.style.setProperty('--mx', 0);
-      hero.style.setProperty('--my', 0);
+
+    $$("a", nav).forEach((link) => {
+      link.addEventListener("click", () => {
+        setMenu(false);
+      });
+    });
+
+    const navCta = $(".nav-cta");
+
+    if (navCta) {
+      navCta.addEventListener("click", () => {
+        setMenu(false);
+      });
+    }
+  }
+     /* ---------- Active navigation ---------- */
+
+  const sections = $$("section[id]");
+  const navLinks = $$(
+    '#nav a[href^="#"]'
+  );
+
+  if ("IntersectionObserver" in window && sections.length) {
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const activeId = `#${entry.target.id}`;
+
+          navLinks.forEach((link) => {
+            const isActive =
+              link.getAttribute("href") === activeId;
+
+            link.classList.toggle("active", isActive);
+          });
+        });
+      },
+      {
+        rootMargin: "-35% 0px -55% 0px",
+        threshold: 0
+      }
+    );
+
+    sections.forEach((section) => {
+      sectionObserver.observe(section);
+    });
+  }
+
+  /* ---------- Reveal animations ---------- */
+
+  const revealItems = $$(".reveal");
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealItems.forEach((item) => {
+      item.classList.add("visible");
+    });
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    revealItems.forEach((item) => {
+      revealObserver.observe(item);
+    });
+  }
+
+  /* ---------- Hero animation ---------- */
+
+  const heroStage = $("#heroStage");
+
+  if (heroStage && !reduceMotion) {
+    let heroTimer;
+
+    const startHeroAnimation = () => {
+      clearInterval(heroTimer);
+
+      heroTimer = setInterval(() => {
+        heroStage.classList.toggle("is-anatomy");
+      }, 4800);
+    };
+
+    startHeroAnimation();
+
+    window.addEventListener("pagehide", () => {
+      clearInterval(heroTimer);
     });
   }
 
   /* ---------- Services carousel ---------- */
-  $$('[data-carousel]').forEach((root) => {
-    const track = $('.car-track', root);
-    const prev = $('.prev', root);
-    const next = $('.next', root);
-    const step = () => {
-      const card = $('.svc-card', track);
-      const gap = parseFloat(getComputedStyle(track).columnGap) || 22;
-      return card ? card.getBoundingClientRect().width + gap : 300;
+
+  $$("[data-carousel]").forEach((carousel) => {
+    const track = $(".car-track", carousel);
+    const prevBtn = $(".car-btn.left", carousel);
+    const nextBtn = $(".car-btn.right", carousel);
+
+    if (!track) return;
+
+    const getStep = () => {
+      const card = track.querySelector(
+        ".service-card, .card"
+      );
+
+      if (!card) {
+        return track.clientWidth * 0.8;
+      }
+
+      const styles = window.getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap) || 0;
+
+      return card.getBoundingClientRect().width + gap;
     };
-    const update = () => {
-      prev.disabled = track.scrollLeft <= 2;
-      next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        track.scrollBy({
+          left: -getStep(),
+          behavior: reduceMotion ? "auto" : "smooth"
+        });
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        track.scrollBy({
+          left: getStep(),
+          behavior: reduceMotion ? "auto" : "smooth"
+        });
+      });
+    }
+  });
+     /* ---------- Technology slider ---------- */
+
+  $$("[data-slider]").forEach((slider) => {
+    const slides = $$(".slide", slider);
+    const dots = $$(".tech-dots button");
+
+    if (!slides.length) return;
+
+    let currentSlide = 0;
+
+    const showSlide = (index) => {
+      currentSlide = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle(
+          "active",
+          i === currentSlide
+        );
+
+        slide.setAttribute(
+          "aria-hidden",
+          String(i !== currentSlide)
+        );
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle(
+          "active",
+          i === currentSlide
+        );
+
+        dot.setAttribute(
+          "aria-current",
+          i === currentSlide ? "true" : "false"
+        );
+      });
     };
-    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
-    track.addEventListener('scroll', update, { passive: true });
-    track.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        showSlide(index);
+      });
     });
-    window.addEventListener('resize', update);
-    update();
+
+    showSlide(0);
   });
 
-  /* ---------- Technology slider ---------- */
-  const slider = $('[data-slider]');
-  if (slider) {
-    const slides = $$('.slide', slider);
-    const dots = $$('.tech-dots button');
-    let index = 0;
-    let timer = null;
+  /* ---------- 3D card tilt ---------- */
 
-    const go = (n) => {
-      index = (n + slides.length) % slides.length;
-      slides.forEach((s, i) => s.classList.toggle('is-active', i === index));
-      dots.forEach((d, i) => {
-        d.classList.toggle('is-active', i === index);
-        d.setAttribute('aria-selected', String(i === index));
+  if (!reduceMotion && window.matchMedia("(pointer: fine)").matches) {
+    $$("[data-tilt]").forEach((card) => {
+      card.addEventListener("mousemove", (event) => {
+        const rect = card.getBoundingClientRect();
+
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const rotateY =
+          ((x / rect.width) - 0.5) * 8;
+
+        const rotateX =
+          (0.5 - (y / rect.height)) * 8;
+
+        card.style.transform =
+          `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       });
-    };
-    const stop = () => { clearInterval(timer); timer = null; };
-    const play = () => {
-      if (reduceMotion) return;
-      stop();
-      timer = setInterval(() => go(index + 1), 5500);
-    };
 
-    dots.forEach((d, i) => d.addEventListener('click', () => { go(i); play(); }));
-    slider.addEventListener('pointerenter', stop);
-    slider.addEventListener('pointerleave', play);
-    go(0);
-    play();
-  }
-
-  /* ---------- 3D tilt on glass cards ---------- */
-  if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
-    $$('[data-tilt]').forEach((card) => {
-      card.addEventListener('pointermove', (e) => {
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.setProperty('--ry', (px * 10).toFixed(2) + 'deg');
-        card.style.setProperty('--rx', (-py * 10).toFixed(2) + 'deg');
-      });
-      card.addEventListener('pointerleave', () => {
-        card.style.setProperty('--rx', '0deg');
-        card.style.setProperty('--ry', '0deg');
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
       });
     });
   }
+
+  /* ---------- Contact information ---------- */
+
+  const contactValues = {
+    phone: SITE.phone || "",
+    email: SITE.email || "",
+    address: SITE.address || "",
+    hours: SITE.hours || ""
+  };
+
+  Object.entries(contactValues).forEach(([key, value]) => {
+    $$(`[data-site="${key}"]`).forEach((element) => {
+      if (value) {
+        element.textContent = value;
+      }
+    });
+
+    $$(`[data-site-row="${key}"]`).forEach((row) => {
+      row.hidden = !value;
+    });
+  });
 
   /* ---------- Booking modal ---------- */
-  const modal = $('#booking');
-  const form = $('#bookingForm');
-  const note = $('#formNote');
-  let lastFocus = null;
 
-  const openModal = () => {
-    lastFocus = document.activeElement;
-    note.textContent = '';
-    note.classList.remove('error');
-    modal.hidden = false;
-    document.body.classList.add('is-locked');
-    setTimeout(() => $('input[name="name"]', modal).focus(), 30);
-  };
-  const closeModal = () => {
-    modal.hidden = true;
-    document.body.classList.remove('is-locked');
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  };
+  const bookingModal = $("#booking");
+  const bookingForm = $("#bookingForm");
+  const formNote = $("#formNote");
 
-  document.addEventListener('click', (e) => {
-    const opener = e.target.closest('[data-open-booking]');
-    if (opener) { e.preventDefault(); openModal(); }
-    if (e.target.closest('[data-close]')) closeModal();
-  });
+  const openBooking = () => {
+    if (!bookingModal) return;
 
-  // Keep keyboard focus inside the dialog while it is open
-  modal.addEventListener('keydown', (e) => {
-    if (e.key !== 'Tab') return;
-    const f = $$('button, input, select, textarea, a[href]', modal).filter((el) => !el.disabled && el.offsetParent !== null);
-    if (!f.length) return;
-    const first = f[0], last = f[f.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-  });
+    bookingModal.classList.add("open");
+    bookingModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
 
-  chatFab.addEventListener('click', () => {
-    const wa = (SITE.whatsapp || '').replace(/\D/g, '');
-    if (wa) window.open('https://wa.me/' + wa, '_blank', 'noopener');
-    else openModal();
-  });
+    const firstInput = $("input", bookingModal);
 
-  // minimum date = today
-  const dateInput = $('input[name="date"]', form);
-  if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(form).entries());
-    const required = ['name', 'phone'];
-    let ok = true;
-    required.forEach((k) => {
-      const el = form.elements[k];
-      const bad = !String(data[k] || '').trim();
-      el.classList.toggle('invalid', bad);
-      if (bad) ok = false;
-    });
-    note.classList.toggle('error', !ok);
-    if (!ok) { note.textContent = 'Please enter your name and phone number.'; return; }
-
-    const lines = [
-      `New consultation request — ${SITE.name || 'PureDental'}`,
-      `Name: ${data.name}`,
-      `Phone: ${data.phone}`,
-      `Treatment: ${data.service}`,
-      data.date ? `Preferred date: ${data.date}` : '',
-      data.message ? `Message: ${data.message}` : ''
-    ].filter(Boolean);
-    const text = lines.join('\n');
-
-    const endpoint = (SITE.formEndpoint || '').trim();
-    const wa = (SITE.whatsapp || '').replace(/\D/g, '');
-    const mail = (SITE.email || '').trim();
-
-    try {
-      if (endpoint) {
-        note.textContent = 'Sending…';
-        const res = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(data)
-        });
-        if (!res.ok) throw new Error('Request failed');
-        note.textContent = 'Thank you! We will contact you shortly.';
-        form.reset();
-      } else if (wa) {
-        window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
-        note.textContent = 'Opening WhatsApp…';
-      } else if (mail) {
-        window.location.href = 'mailto:' + mail + '?subject=' + encodeURIComponent('Consultation request') + '&body=' + encodeURIComponent(text);
-        note.textContent = 'Opening your e-mail app…';
-      } else {
-        note.classList.add('error');
-        note.textContent = 'Booking is not configured yet — see js/config.js.';
-      }
-    } catch (err) {
-      note.classList.add('error');
-      note.textContent = 'Something went wrong. Please try again or contact us directly.';
+    if (firstInput) {
+      setTimeout(() => firstInput.focus(), 100);
     }
+  };
+
+  const closeBooking = () => {
+    if (!bookingModal) return;
+
+    bookingModal.classList.remove("open");
+    bookingModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+  };
+
+  $$("[data-open-booking]").forEach((button) => {
+    button.addEventListener("click", openBooking);
   });
 
-  /* ---------- Search ---------- */
-  const INDEX = [
-    { t: 'Home', h: '#home', k: 'hero smile begin better' },
-    { t: 'Cosmetic Dentistry', h: '#treatments', k: 'veneers bonding smile design aesthetic' },
-    { t: 'Dental Implants', h: '#treatments', k: 'implant tooth replacement missing' },
-    { t: 'Teeth Whitening', h: '#treatments', k: 'whitening bleaching bright' },
-    { t: 'Preventive Care', h: '#treatments', k: 'cleaning checkup prevention hygiene' },
-    { t: 'Orthodontics', h: '#treatments', k: 'braces aligners straight' },
-    { t: 'Root Canal Therapy', h: '#treatments', k: 'root canal endodontic pain' },
-    { t: 'Precision Technology', h: '#technology', k: 'scan 3d digital x-ray imaging' },
-    { t: 'Smile Transformation', h: '#about', k: 'about comfort precision personalized care' },
-    { t: 'Book a consultation', h: '#contact', k: 'contact booking appointment visit call' }
-  ];
-  const searchBtn = $('#searchBtn');
-  const panel = $('#searchPanel');
-  const input = $('#searchInput');
-  const results = $('#searchResults');
+  if (bookingModal) {
+    $$("[data-close]", bookingModal).forEach((button) => {
+      button.addEventListener("click", closeBooking);
+    });
 
-  const render = (q) => {
-    const term = q.trim().toLowerCase();
-    const list = term
-      ? INDEX.filter((i) => (i.t + ' ' + i.k).toLowerCase().includes(term))
-      : INDEX.slice(1, 6);
-    results.innerHTML = '';
-    if (!list.length) {
-      const li = document.createElement('li');
-      li.className = 'search-empty';
-      li.textContent = 'No results — try “implants”, “whitening” or “contact”.';
-      results.appendChild(li);
+    bookingModal.addEventListener("click", (event) => {
+      if (event.target === bookingModal) {
+        closeBooking();
+      }
+    });
+  }
+     /* ---------- Booking form ---------- */
+
+  if (bookingForm) {
+    bookingForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!bookingForm.reportValidity()) return;
+
+      const formData = new FormData(bookingForm);
+
+      const data = {
+        name: String(formData.get("name") || "").trim(),
+        phone: String(formData.get("phone") || "").trim(),
+        service: String(formData.get("service") || "").trim(),
+        date: String(formData.get("date") || "").trim(),
+        message: String(formData.get("message") || "").trim()
+      };
+
+      if (!data.name || !data.phone) {
+        if (formNote) {
+          formNote.textContent =
+            "لطفاً نام و شماره تماس را وارد کنید.";
+        }
+        return;
+      }
+
+      const submitButton = $('button[type="submit"]', bookingForm);
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "در حال ثبت...";
+      }
+
+      const endpoint = SITE.formEndpoint || "";
+      const whatsapp = String(SITE.whatsapp || "").replace(/\D/g, "");
+
+      const message = [
+        "درخواست رزرو نوبت",
+        `نام: ${data.name}`,
+        `شماره تماس: ${data.phone}`,
+        `خدمت موردنظر: ${data.service || "مشخص نشده"}`,
+        `تاریخ پیشنهادی: ${data.date || "مشخص نشده"}`,
+        `توضیحات: ${data.message || "ندارد"}`
+      ].join("\n");
+
+      try {
+        if (endpoint) {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          });
+
+          if (!response.ok) {
+            throw new Error("خطا در ارسال فرم");
+          }
+
+          if (formNote) {
+            formNote.textContent =
+              "درخواست شما با موفقیت ارسال شد.";
+          }
+
+          bookingForm.reset();
+        } else if (whatsapp) {
+          const url =
+            `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
+
+          window.open(url, "_blank", "noopener,noreferrer");
+
+          if (formNote) {
+            formNote.textContent =
+              "پیام رزرو در واتساپ آماده ارسال است.";
+          }
+        } else {
+          if (formNote) {
+            formNote.textContent =
+              "هنوز راه ارتباطی رزرو تنظیم نشده است. لطفاً با مطب تماس بگیرید.";
+          }
+        }
+      } catch (error) {
+        console.error(error);
+
+        if (formNote) {
+          formNote.textContent =
+            "ارسال درخواست انجام نشد. لطفاً دوباره تلاش کنید.";
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = "ثبت درخواست";
+        }
+      }
+    });
+  }
+
+  /* ---------- Search panel ---------- */
+
+  const searchBtn = $("#searchBtn");
+  const searchPanel = $("#searchPanel");
+  const searchInput = $("#searchInput");
+  const searchForm = $("#searchForm");
+  const searchResults = $("#searchResults");
+
+  const searchItems = [
+    {
+      title: "خدمات دندانپزشکی",
+      keywords: "خدمات درمان دندانپزشکی service",
+      url: "#services"
+    },
+    {
+      title: "ایمپلنت دندان",
+      keywords: "ایمپلنت کاشت دندان implant",
+      url: "#services"
+    },
+    {
+      title: "لمینت و زیبایی دندان",
+      keywords: "لمینت زیبایی لبخند veneer cosmetic",
+      url: "#services"
+    },
+    {
+      title: "درباره پزشک",
+      keywords: "دکتر شعله نعمتی درباره معرفی doctor about",
+      url: "#about"
+    },
+    {
+      title: "تجهیزات و تکنولوژی",
+      keywords: "تجهیزات فناوری تکنولوژی technology",
+      url: "#technology"
+    },
+    {
+      title: "رزرو نوبت",
+      keywords: "رزرو نوبت وقت booking appointment",
+      url: "#booking"
+    },
+    {
+      title: "تماس با مطب",
+      keywords: "تماس آدرس تلفن ارتباط contact",
+      url: "#contact"
+    }
+  ];
+
+  const closeSearch = () => {
+    if (!searchPanel) return;
+
+    searchPanel.classList.remove("open");
+    searchPanel.setAttribute("aria-hidden", "true");
+  };
+
+  if (searchBtn && searchPanel) {
+    searchBtn.addEventListener("click", () => {
+      const isOpen = searchPanel.classList.contains("open");
+
+      searchPanel.classList.toggle("open", !isOpen);
+      searchPanel.setAttribute(
+        "aria-hidden",
+        String(isOpen)
+      );
+
+      if (!isOpen && searchInput) {
+        setTimeout(() => searchInput.focus(), 100);
+      }
+    });
+  }
+
+  const runSearch = (query) => {
+    if (!searchResults) return;
+
+    const normalizedQuery = query.trim().toLowerCase();
+
+    searchResults.innerHTML = "";
+
+    if (!normalizedQuery) {
+      searchResults.textContent =
+        "عبارت موردنظر را جست‌وجو کنید.";
       return;
     }
-    list.forEach((item) => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = item.h;
-      a.innerHTML = '<span></span><small></small>';
-      a.firstChild.textContent = item.t;
-      a.lastChild.textContent = item.h.replace('#', '');
-      a.addEventListener('click', () => toggleSearch(false));
-      li.appendChild(a);
-      results.appendChild(li);
+
+    const matches = searchItems.filter((item) => {
+      const text =
+        `${item.title} ${item.keywords}`.toLowerCase();
+
+      return text.includes(normalizedQuery);
+    });
+
+    if (!matches.length) {
+      searchResults.textContent =
+        "موردی پیدا نشد. عبارت دیگری را امتحان کنید.";
+      return;
+    }
+
+    matches.forEach((item) => {
+      const link = document.createElement("a");
+
+      link.href = item.url;
+      link.textContent = item.title;
+
+      link.addEventListener("click", closeSearch);
+
+      searchResults.appendChild(link);
     });
   };
-  const toggleSearch = (open) => {
-    panel.hidden = !open;
-    searchBtn.setAttribute('aria-expanded', String(open));
-    if (open) { render(''); input.value = ''; setTimeout(() => input.focus(), 20); }
-  };
-  searchBtn.addEventListener('click', () => toggleSearch(panel.hidden));
-  input.addEventListener('input', () => render(input.value));
-  $('#searchForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const first = $('a', results);
-    if (first) first.click();
+
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      runSearch(searchInput.value);
+    });
+  }
+
+  if (searchForm) {
+    searchForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (searchInput) {
+        runSearch(searchInput.value);
+      }
+    });
+  }
+     /* ---------- Escape key ---------- */
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeBooking();
+      closeSearch();
+      setMenu(false);
+    }
   });
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    if (!modal.hidden) closeModal();
-    else if (!panel.hidden) { toggleSearch(false); searchBtn.focus(); }
-    else if (nav.classList.contains('open')) setMenu(false);
+
+  /* ---------- Smooth anchor navigation ---------- */
+
+  $$('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const targetId = link.getAttribute("href");
+
+      if (!targetId || targetId === "#") return;
+
+      const target = $(targetId);
+
+      if (!target) return;
+
+      event.preventDefault();
+
+      target.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start"
+      });
+
+      setMenu(false);
+      closeSearch();
+    });
   });
+
+  /* ---------- Chat button ---------- */
+
+  if (chatFab) {
+    chatFab.addEventListener("click", () => {
+      if (SITE.whatsapp) {
+        const phone = String(SITE.whatsapp).replace(/\D/g, "");
+
+        window.open(
+          `https://wa.me/${phone}`,
+          "_blank",
+          "noopener,noreferrer"
+        );
+      } else if (SITE.phone) {
+        window.location.href = `tel:${SITE.phone}`;
+      } else {
+        document.querySelector("#contact")?.scrollIntoView({
+          behavior: reduceMotion ? "auto" : "smooth"
+        });
+      }
+    });
+  }
+
 })();

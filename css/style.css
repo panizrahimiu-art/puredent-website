@@ -17,8 +17,7 @@
   --night-2: #1b1e23;
   --line: rgba(28, 29, 32, .1);
 
-  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --header-h: 72px;
+  --font: "Vazirmatn", Tahoma, system-ui, sans-serif;  --header-h: 72px;
   --radius: 22px;
   --ease: cubic-bezier(.22, .7, .2, 1);
   --shadow-soft: 0 24px 50px -24px rgba(70, 52, 34, .35);

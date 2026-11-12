@@ -461,20 +461,23 @@ button { font: inherit; color: inherit; }
   .arc-line, .arc-glow { stroke-dashoffset: 0; }
 }
 /* =========================================
-   Compatibility fixes — Dr. Sholeh Nemati
-   ========================================= */
+   PURE DENTAL — FINAL FIXES
+========================================= */
 
 /* Reveal animations */
+.reveal.in,
 .reveal.visible {
   opacity: 1;
   transform: none;
 }
 
 /* Active navigation */
+.nav a.is-active,
 .nav a.active {
   color: var(--ink);
 }
 
+.nav a.is-active::after,
 .nav a.active::after {
   transform: scaleX(1);
 }
@@ -486,36 +489,16 @@ button { font: inherit; color: inherit; }
   transform: none;
 }
 
-/* Carousel buttons */
-.car-btn.left {
-  left: -23px;
-}
-
-.car-btn.right {
-  right: -23px;
-}
-
-/* Technology slider */
-.slide.active {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-}
-
-.tech-dots button.active {
-  width: 48px;
-  background: var(--tan-2);
-}
-
 /* Search panel */
-.search-panel {
-  display: none;
+.search-panel[hidden] {
+  display: none !important;
 }
 
 .search-panel.open {
   display: block;
 }
 
+/* Search results */
 .search-results {
   list-style: none;
   margin: 8px 0 0;
@@ -525,7 +508,9 @@ button { font: inherit; color: inherit; }
 }
 
 .search-results a {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px 12px;
   border-radius: 10px;
   text-decoration: none;
@@ -535,33 +520,82 @@ button { font: inherit; color: inherit; }
   background: rgba(156, 122, 88, .1);
 }
 
+/* Carousel buttons */
+.car-btn.left,
+.car-btn.prev {
+  left: -23px;
+}
+
+.car-btn.right,
+.car-btn.next {
+  right: -23px;
+}
+
+/* Technology slider */
+.slide.is-active,
+.slide.active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.tech-dots button.is-active,
+.tech-dots button.active {
+  width: 48px;
+  background: var(--tan-2);
+}
+
 /* Booking modal */
-.modal {
-  display: none;
+.modal[hidden] {
+  display: none !important;
 }
 
 .modal.open {
   display: grid;
 }
 
+body.is-locked,
 body.modal-open {
   overflow: hidden;
 }
 
-/* Form button */
-#bookingForm button:disabled {
-  opacity: .6;
-  cursor: wait;
+/* Form validation */
+#bookingForm input.invalid,
+#bookingForm select.invalid,
+#bookingForm textarea.invalid {
+  border-color: #c0504d;
+  box-shadow: 0 0 0 4px rgba(192, 80, 77, .12);
+}
+
+.form-note.error {
+  color: #b4403d;
+}
+
+/* Floating chat button */
+.chat-fab.show {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
 }
 
 /* Responsive fixes */
 @media (max-width: 1180px) {
-  .car-btn.left {
+  .car-btn.left,
+  .car-btn.prev {
     left: 6px;
   }
 
-  .car-btn.right {
+  .car-btn.right,
+  .car-btn.next {
     right: 6px;
+  }
+}
+
+@media (max-width: 920px) {
+  .nav.open {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -571,7 +605,6 @@ body.modal-open {
   }
 }
 
-/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;

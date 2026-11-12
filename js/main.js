@@ -1,11 +1,13 @@
-/* =========================================
-   Dr. Sholeh Nemati — Main JavaScript
-   ========================================= */
+/* =====================================================
+   PURE DENTAL
+   Main JavaScript
+   Dr. Sholeh Nemati
+===================================================== */
 
 (() => {
   "use strict";
 
-  const SITE = window.SITE_CONFIG || {};
+  /* ---------- Helpers ---------- */
 
   const $ = (selector, context = document) =>
     context.querySelector(selector);
@@ -13,11 +15,14 @@
   const $$ = (selector, context = document) =>
     Array.from(context.querySelectorAll(selector));
 
+  const SITE = window.SITE_CONFIG || {};
+
   const reduceMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  /* ---------- Current year ---------- */
+
+  /* ---------- Footer & Contact Information ---------- */
 
   const year = $("#year");
 
@@ -25,38 +30,83 @@
     year.textContent = new Date().getFullYear();
   }
 
-  /* ---------- Header ---------- */
+  ["phone", "email", "address", "hours"].forEach((key) => {
+
+    const value = String(SITE[key] || "").trim();
+
+    const row = $(`[data-site-row="${key}"]`);
+
+    if (!row || !value) return;
+
+    const content = $(`[data-site="${key}"]`, row);
+
+    if (content) {
+      content.textContent = value;
+    }
+
+    const link = $("[data-site-link]", row);
+
+    if (link) {
+
+      if (link.dataset.siteLink === "tel") {
+
+        link.href =
+          "tel:" + value.replace(/[^\d+]/g, "");
+
+      } else if (link.dataset.siteLink === "mailto") {
+
+        link.href = "mailto:" + value;
+
+      }
+
+    }
+
+    row.hidden = false;
+
+  });
+
+
+  /* ---------- Header Scroll Effect ---------- */
 
   const header = $("#siteHeader");
   const chatFab = $("#chatFab");
 
-  const onScroll = () => {
-    const y = window.scrollY;
+  const handleScroll = () => {
+
+    const scrollPosition = window.scrollY;
 
     if (header) {
-      header.classList.toggle("is-scrolled", y > 40);
+      header.classList.toggle(
+        "is-scrolled",
+        scrollPosition > 40
+      );
     }
 
     if (chatFab) {
       chatFab.classList.toggle(
         "show",
-        y > window.innerHeight * 0.6
+        scrollPosition > window.innerHeight * 0.6
       );
     }
+
   };
 
-  window.addEventListener("scroll", onScroll, {
-    passive: true
-  });
+  window.addEventListener(
+    "scroll",
+    handleScroll,
+    { passive: true }
+  );
 
-  onScroll();
+  handleScroll();
 
-  /* ---------- Mobile menu ---------- */
+
+  /* ---------- Mobile Navigation ---------- */
 
   const nav = $("#nav");
   const menuBtn = $("#menuBtn");
 
   const setMenu = (open) => {
+
     if (!nav || !menuBtn) return;
 
     nav.classList.toggle("open", open);
@@ -79,563 +129,1129 @@
         open ? "#i-close" : "#i-menu"
       );
     }
+
   };
 
   if (menuBtn && nav) {
+
     menuBtn.addEventListener("click", () => {
+
       setMenu(!nav.classList.contains("open"));
+
     });
 
     $$("a", nav).forEach((link) => {
+
       link.addEventListener("click", () => {
         setMenu(false);
       });
+
     });
 
-    const navCta = $(".nav-cta");
+    const navCTA = $(".nav-cta");
 
-    if (navCta) {
-      navCta.addEventListener("click", () => {
+    if (navCTA) {
+      navCTA.addEventListener("click", () => {
         setMenu(false);
       });
     }
+
   }
-     /* ---------- Active navigation ---------- */
 
-  const sections = $$("section[id]");
-  const navLinks = $$(
-    '#nav a[href^="#"]'
-  );
 
-  if ("IntersectionObserver" in window && sections.length) {
+  /* ---------- Active Navigation ---------- */
+
+  const navLinks = $$("[data-nav]");
+  const sections = $$("[data-section]");
+
+  if (
+    "IntersectionObserver" in window &&
+    sections.length
+  ) {
+
     const sectionObserver = new IntersectionObserver(
+
       (entries) => {
+
         entries.forEach((entry) => {
+
           if (!entry.isIntersecting) return;
 
-          const activeId = `#${entry.target.id}`;
+          const activeID = entry.target.id;
 
           navLinks.forEach((link) => {
-            const isActive =
-              link.getAttribute("href") === activeId;
 
-            link.classList.toggle("active", isActive);
+            const active =
+              link.dataset.nav === activeID;
+
+            link.classList.toggle(
+              "is-active",
+              active
+            );
+
+            link.classList.toggle(
+              "active",
+              active
+            );
+
           });
+
         });
+
       },
+
       {
-        rootMargin: "-35% 0px -55% 0px",
+        rootMargin: "-40% 0px -50% 0px",
         threshold: 0
       }
+
     );
 
     sections.forEach((section) => {
       sectionObserver.observe(section);
     });
+
   }
 
-  /* ---------- Reveal animations ---------- */
 
-  const revealItems = $$(".reveal");
+  /* ---------- Reveal Animations ---------- */
 
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    revealItems.forEach((item) => {
-      item.classList.add("visible");
-    });
+  const revealElements = $$(".reveal");
+
+  const showElement = (element) => {
+
+    element.classList.add("in");
+    element.classList.add("visible");
+
+  };
+
+  if (
+    reduceMotion ||
+    !("IntersectionObserver" in window)
+  ) {
+
+    revealElements.forEach(showElement);
+
   } else {
+
     const revealObserver = new IntersectionObserver(
+
       (entries, observer) => {
+
         entries.forEach((entry) => {
+
           if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
+
+            showElement(entry.target);
+
             observer.unobserve(entry.target);
+
           }
+
         });
+
       },
+
       {
-        threshold: 0.12
+        threshold: 0.12,
+        rootMargin: "0px 0px -5% 0px"
       }
+
     );
 
-    revealItems.forEach((item) => {
-      revealObserver.observe(item);
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
     });
+
   }
 
-  /* ---------- Hero animation ---------- */
+
+  /* ---------- Hero Tooth Animation ---------- */
 
   const heroStage = $("#heroStage");
 
   if (heroStage && !reduceMotion) {
-    let heroTimer;
 
-    const startHeroAnimation = () => {
-      clearInterval(heroTimer);
+    const heroTimer = setInterval(() => {
 
-      heroTimer = setInterval(() => {
-        heroStage.classList.toggle("is-anatomy");
-      }, 4800);
-    };
+      heroStage.classList.toggle("is-anatomy");
 
-    startHeroAnimation();
+    }, 4800);
 
     window.addEventListener("pagehide", () => {
       clearInterval(heroTimer);
     });
+
+    const hero = $("#home");
+
+    if (hero) {
+
+      hero.addEventListener("pointermove", (event) => {
+
+        const rect = hero.getBoundingClientRect();
+
+        const x =
+          (event.clientX - rect.left) / rect.width - 0.5;
+
+        const y =
+          (event.clientY - rect.top) / rect.height - 0.5;
+
+        hero.style.setProperty(
+          "--mx",
+          x.toFixed(3)
+        );
+
+        hero.style.setProperty(
+          "--my",
+          y.toFixed(3)
+        );
+
+      });
+
+      hero.addEventListener("pointerleave", () => {
+
+        hero.style.setProperty("--mx", "0");
+        hero.style.setProperty("--my", "0");
+
+      });
+
+    }
+
   }
 
-  /* ---------- Services carousel ---------- */
+
+  /* ---------- Services Carousel ---------- */
 
   $$("[data-carousel]").forEach((carousel) => {
+
     const track = $(".car-track", carousel);
+
     const prevBtn = $(".car-btn.left", carousel);
+
     const nextBtn = $(".car-btn.right", carousel);
 
     if (!track) return;
 
     const getStep = () => {
-      const card = track.querySelector(
-        ".service-card, .card"
-      );
+
+      const card = $(".svc-card", track);
 
       if (!card) {
         return track.clientWidth * 0.8;
       }
 
-      const styles = window.getComputedStyle(track);
-      const gap = parseFloat(styles.columnGap) || 0;
+      const styles = getComputedStyle(track);
 
-      return card.getBoundingClientRect().width + gap;
+      const gap =
+        parseFloat(styles.columnGap) || 22;
+
+      return (
+        card.getBoundingClientRect().width + gap
+      );
+
+    };
+
+    const updateButtons = () => {
+
+      if (prevBtn) {
+
+        prevBtn.disabled =
+          track.scrollLeft >= -2;
+
+      }
+
+      if (nextBtn) {
+
+        nextBtn.disabled =
+          Math.abs(
+            track.scrollLeft +
+            track.clientWidth -
+            track.scrollWidth
+          ) < 3;
+
+      }
+
     };
 
     if (prevBtn) {
+
       prevBtn.addEventListener("click", () => {
+
         track.scrollBy({
           left: -getStep(),
           behavior: reduceMotion ? "auto" : "smooth"
         });
+
       });
+
     }
 
     if (nextBtn) {
+
       nextBtn.addEventListener("click", () => {
+
         track.scrollBy({
           left: getStep(),
           behavior: reduceMotion ? "auto" : "smooth"
         });
-      });
-    }
-  });
-     /* ---------- Technology slider ---------- */
 
-  $$("[data-slider]").forEach((slider) => {
+      });
+
+    }
+
+    track.addEventListener(
+      "scroll",
+      updateButtons,
+      { passive: true }
+    );
+
+    track.addEventListener("keydown", (event) => {
+
+      if (event.key === "ArrowRight" && nextBtn) {
+        event.preventDefault();
+        nextBtn.click();
+      }
+
+      if (event.key === "ArrowLeft" && prevBtn) {
+        event.preventDefault();
+        prevBtn.click();
+      }
+
+    });
+
+    window.addEventListener(
+      "resize",
+      updateButtons
+    );
+
+    updateButtons();
+
+  });
+
+
+  /* ---------- Technology Slider ---------- */
+
+  const slider = $("[data-slider]");
+
+  if (slider) {
+
     const slides = $$(".slide", slider);
+
     const dots = $$(".tech-dots button");
 
-    if (!slides.length) return;
+    let currentIndex = 0;
 
-    let currentSlide = 0;
+    let sliderTimer = null;
 
-    const showSlide = (index) => {
-      currentSlide = (index + slides.length) % slides.length;
+    const goToSlide = (index) => {
+
+      if (!slides.length) return;
+
+      currentIndex =
+        (index + slides.length) % slides.length;
 
       slides.forEach((slide, i) => {
+
+        const active = i === currentIndex;
+
         slide.classList.toggle(
-          "active",
-          i === currentSlide
+          "is-active",
+          active
         );
 
-        slide.setAttribute(
-          "aria-hidden",
-          String(i !== currentSlide)
+        slide.classList.toggle(
+          "active",
+          active
         );
+
       });
 
       dots.forEach((dot, i) => {
+
+        const active = i === currentIndex;
+
+        dot.classList.toggle(
+          "is-active",
+          active
+        );
+
         dot.classList.toggle(
           "active",
-          i === currentSlide
+          active
         );
 
         dot.setAttribute(
-          "aria-current",
-          i === currentSlide ? "true" : "false"
+          "aria-selected",
+          String(active)
         );
+
       });
+
+    };
+
+    const stopSlider = () => {
+
+      clearInterval(sliderTimer);
+
+      sliderTimer = null;
+
+    };
+
+    const startSlider = () => {
+
+      stopSlider();
+
+      if (reduceMotion || slides.length < 2) return;
+
+      sliderTimer = setInterval(() => {
+
+        goToSlide(currentIndex + 1);
+
+      }, 5500);
+
     };
 
     dots.forEach((dot, index) => {
+
       dot.addEventListener("click", () => {
-        showSlide(index);
+
+        goToSlide(index);
+
+        startSlider();
+
       });
+
     });
 
-    showSlide(0);
-  });
+    slider.addEventListener(
+      "pointerenter",
+      stopSlider
+    );
 
-  /* ---------- 3D card tilt ---------- */
+    slider.addEventListener(
+      "pointerleave",
+      startSlider
+    );
 
-  if (!reduceMotion && window.matchMedia("(pointer: fine)").matches) {
+    goToSlide(0);
+
+    startSlider();
+
+  }
+
+
+  /* ---------- 3D Glass Cards ---------- */
+
+  if (
+    !reduceMotion &&
+    window.matchMedia("(hover: hover)").matches
+  ) {
+
     $$("[data-tilt]").forEach((card) => {
-      card.addEventListener("mousemove", (event) => {
+
+      card.addEventListener("pointermove", (event) => {
+
         const rect = card.getBoundingClientRect();
 
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        const x =
+          (event.clientX - rect.left) / rect.width - 0.5;
 
-        const rotateY =
-          ((x / rect.width) - 0.5) * 8;
+        const y =
+          (event.clientY - rect.top) / rect.height - 0.5;
 
-        const rotateX =
-          (0.5 - (y / rect.height)) * 8;
+        card.style.setProperty(
+          "--ry",
+          (x * 10).toFixed(2) + "deg"
+        );
 
-        card.style.transform =
-          `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        card.style.setProperty(
+          "--rx",
+          (-y * 10).toFixed(2) + "deg"
+        );
+
       });
 
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "";
+      card.addEventListener("pointerleave", () => {
+
+        card.style.setProperty("--rx", "0deg");
+        card.style.setProperty("--ry", "0deg");
+
       });
+
     });
+
   }
 
-  /* ---------- Contact information ---------- */
 
-  const contactValues = {
-    phone: SITE.phone || "",
-    email: SITE.email || "",
-    address: SITE.address || "",
-    hours: SITE.hours || ""
-  };
+  /* ---------- Booking Modal ---------- */
 
-  Object.entries(contactValues).forEach(([key, value]) => {
-    $$(`[data-site="${key}"]`).forEach((element) => {
-      if (value) {
-        element.textContent = value;
-      }
-    });
+  const modal = $("#booking");
 
-    $$(`[data-site-row="${key}"]`).forEach((row) => {
-      row.hidden = !value;
-    });
-  });
-
-  /* ---------- Booking modal ---------- */
-
-  const bookingModal = $("#booking");
   const bookingForm = $("#bookingForm");
+
   const formNote = $("#formNote");
 
-  const openBooking = () => {
-    if (!bookingModal) return;
+  let lastFocusedElement = null;
 
-    bookingModal.classList.add("open");
-    bookingModal.setAttribute("aria-hidden", "false");
+  const openModal = () => {
+
+    if (!modal) return;
+
+    lastFocusedElement = document.activeElement;
+
+    if (formNote) {
+
+      formNote.textContent = "";
+
+      formNote.classList.remove("error");
+
+    }
+
+    modal.hidden = false;
+
+    modal.classList.add("open");
+
+    modal.setAttribute("aria-hidden", "false");
+
     document.body.classList.add("modal-open");
 
-    const firstInput = $("input", bookingModal);
+    document.body.classList.add("is-locked");
 
-    if (firstInput) {
-      setTimeout(() => firstInput.focus(), 100);
-    }
+    setTimeout(() => {
+
+      const nameInput =
+        $('input[name="name"]', modal);
+
+      if (nameInput) nameInput.focus();
+
+    }, 50);
+
   };
 
-  const closeBooking = () => {
-    if (!bookingModal) return;
+  const closeModal = () => {
 
-    bookingModal.classList.remove("open");
-    bookingModal.setAttribute("aria-hidden", "true");
+    if (!modal) return;
+
+    modal.hidden = true;
+
+    modal.classList.remove("open");
+
+    modal.setAttribute("aria-hidden", "true");
+
     document.body.classList.remove("modal-open");
+
+    document.body.classList.remove("is-locked");
+
+    if (
+      lastFocusedElement &&
+      typeof lastFocusedElement.focus === "function"
+    ) {
+
+      lastFocusedElement.focus();
+
+    }
+
   };
 
-  $$("[data-open-booking]").forEach((button) => {
-    button.addEventListener("click", openBooking);
+
+  /* Open & Close Buttons */
+
+  document.addEventListener("click", (event) => {
+
+    const opener =
+      event.target.closest("[data-open-booking]");
+
+    const closer =
+      event.target.closest("[data-close]");
+
+    if (opener) {
+
+      event.preventDefault();
+
+      openModal();
+
+    }
+
+    if (closer) {
+
+      closeModal();
+
+    }
+
   });
 
-  if (bookingModal) {
-    $$("[data-close]", bookingModal).forEach((button) => {
-      button.addEventListener("click", closeBooking);
-    });
 
-    bookingModal.addEventListener("click", (event) => {
-      if (event.target === bookingModal) {
-        closeBooking();
-      }
-    });
-  }
-     /* ---------- Booking form ---------- */
+  /* Keyboard Accessibility */
 
-  if (bookingForm) {
-    bookingForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
+  if (modal) {
 
-      if (!bookingForm.reportValidity()) return;
+    modal.addEventListener("keydown", (event) => {
 
-      const formData = new FormData(bookingForm);
+      if (event.key !== "Tab") return;
 
-      const data = {
-        name: String(formData.get("name") || "").trim(),
-        phone: String(formData.get("phone") || "").trim(),
-        service: String(formData.get("service") || "").trim(),
-        date: String(formData.get("date") || "").trim(),
-        message: String(formData.get("message") || "").trim()
-      };
+      const focusable = $$(
+        'button, input, select, textarea, a[href]',
+        modal
+      ).filter((element) => {
 
-      if (!data.name || !data.phone) {
-        if (formNote) {
-          formNote.textContent =
-            "لطفاً نام و شماره تماس را وارد کنید.";
-        }
-        return;
-      }
+        return (
+          !element.disabled &&
+          element.offsetParent !== null
+        );
 
-      const submitButton = $('button[type="submit"]', bookingForm);
-
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = "در حال ثبت...";
-      }
-
-      const endpoint = SITE.formEndpoint || "";
-      const whatsapp = String(SITE.whatsapp || "").replace(/\D/g, "");
-
-      const message = [
-        "درخواست رزرو نوبت",
-        `نام: ${data.name}`,
-        `شماره تماس: ${data.phone}`,
-        `خدمت موردنظر: ${data.service || "مشخص نشده"}`,
-        `تاریخ پیشنهادی: ${data.date || "مشخص نشده"}`,
-        `توضیحات: ${data.message || "ندارد"}`
-      ].join("\n");
-
-      try {
-        if (endpoint) {
-          const response = await fetch(endpoint, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-          });
-
-          if (!response.ok) {
-            throw new Error("خطا در ارسال فرم");
-          }
-
-          if (formNote) {
-            formNote.textContent =
-              "درخواست شما با موفقیت ارسال شد.";
-          }
-
-          bookingForm.reset();
-        } else if (whatsapp) {
-          const url =
-            `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
-
-          window.open(url, "_blank", "noopener,noreferrer");
-
-          if (formNote) {
-            formNote.textContent =
-              "پیام رزرو در واتساپ آماده ارسال است.";
-          }
-        } else {
-          if (formNote) {
-            formNote.textContent =
-              "هنوز راه ارتباطی رزرو تنظیم نشده است. لطفاً با مطب تماس بگیرید.";
-          }
-        }
-      } catch (error) {
-        console.error(error);
-
-        if (formNote) {
-          formNote.textContent =
-            "ارسال درخواست انجام نشد. لطفاً دوباره تلاش کنید.";
-        }
-      } finally {
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = "ثبت درخواست";
-        }
-      }
-    });
-  }
-
-  /* ---------- Search panel ---------- */
-
-  const searchBtn = $("#searchBtn");
-  const searchPanel = $("#searchPanel");
-  const searchInput = $("#searchInput");
-  const searchForm = $("#searchForm");
-  const searchResults = $("#searchResults");
-
-  const searchItems = [
-    {
-      title: "خدمات دندانپزشکی",
-      keywords: "خدمات درمان دندانپزشکی service",
-      url: "#services"
-    },
-    {
-      title: "ایمپلنت دندان",
-      keywords: "ایمپلنت کاشت دندان implant",
-      url: "#services"
-    },
-    {
-      title: "لمینت و زیبایی دندان",
-      keywords: "لمینت زیبایی لبخند veneer cosmetic",
-      url: "#services"
-    },
-    {
-      title: "درباره پزشک",
-      keywords: "دکتر شعله نعمتی درباره معرفی doctor about",
-      url: "#about"
-    },
-    {
-      title: "تجهیزات و تکنولوژی",
-      keywords: "تجهیزات فناوری تکنولوژی technology",
-      url: "#technology"
-    },
-    {
-      title: "رزرو نوبت",
-      keywords: "رزرو نوبت وقت booking appointment",
-      url: "#booking"
-    },
-    {
-      title: "تماس با مطب",
-      keywords: "تماس آدرس تلفن ارتباط contact",
-      url: "#contact"
-    }
-  ];
-
-  const closeSearch = () => {
-    if (!searchPanel) return;
-
-    searchPanel.classList.remove("open");
-    searchPanel.setAttribute("aria-hidden", "true");
-  };
-
-  if (searchBtn && searchPanel) {
-    searchBtn.addEventListener("click", () => {
-      const isOpen = searchPanel.classList.contains("open");
-
-      searchPanel.classList.toggle("open", !isOpen);
-      searchPanel.setAttribute(
-        "aria-hidden",
-        String(isOpen)
-      );
-
-      if (!isOpen && searchInput) {
-        setTimeout(() => searchInput.focus(), 100);
-      }
-    });
-  }
-
-  const runSearch = (query) => {
-    if (!searchResults) return;
-
-    const normalizedQuery = query.trim().toLowerCase();
-
-    searchResults.innerHTML = "";
-
-    if (!normalizedQuery) {
-      searchResults.textContent =
-        "عبارت موردنظر را جست‌وجو کنید.";
-      return;
-    }
-
-    const matches = searchItems.filter((item) => {
-      const text =
-        `${item.title} ${item.keywords}`.toLowerCase();
-
-      return text.includes(normalizedQuery);
-    });
-
-    if (!matches.length) {
-      searchResults.textContent =
-        "موردی پیدا نشد. عبارت دیگری را امتحان کنید.";
-      return;
-    }
-
-    matches.forEach((item) => {
-      const link = document.createElement("a");
-
-      link.href = item.url;
-      link.textContent = item.title;
-
-      link.addEventListener("click", closeSearch);
-
-      searchResults.appendChild(link);
-    });
-  };
-
-  if (searchInput) {
-    searchInput.addEventListener("input", () => {
-      runSearch(searchInput.value);
-    });
-  }
-
-  if (searchForm) {
-    searchForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      if (searchInput) {
-        runSearch(searchInput.value);
-      }
-    });
-  }
-     /* ---------- Escape key ---------- */
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeBooking();
-      closeSearch();
-      setMenu(false);
-    }
-  });
-
-  /* ---------- Smooth anchor navigation ---------- */
-
-  $$('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const targetId = link.getAttribute("href");
-
-      if (!targetId || targetId === "#") return;
-
-      const target = $(targetId);
-
-      if (!target) return;
-
-      event.preventDefault();
-
-      target.scrollIntoView({
-        behavior: reduceMotion ? "auto" : "smooth",
-        block: "start"
       });
 
-      setMenu(false);
-      closeSearch();
-    });
-  });
+      if (!focusable.length) return;
 
-  /* ---------- Chat button ---------- */
+      const first = focusable[0];
+
+      const last = focusable[focusable.length - 1];
+
+      if (
+        event.shiftKey &&
+        document.activeElement === first
+      ) {
+
+        event.preventDefault();
+
+        last.focus();
+
+      } else if (
+        !event.shiftKey &&
+        document.activeElement === last
+      ) {
+
+        event.preventDefault();
+
+        first.focus();
+
+      }
+
+    });
+
+  }
+
+
+  /* ---------- WhatsApp Floating Button ---------- */
 
   if (chatFab) {
+
     chatFab.addEventListener("click", () => {
-      if (SITE.whatsapp) {
-        const phone = String(SITE.whatsapp).replace(/\D/g, "");
+
+      const whatsapp =
+        String(SITE.whatsapp || "").replace(/\D/g, "");
+
+      if (whatsapp) {
 
         window.open(
-          `https://wa.me/${phone}`,
+          "https://wa.me/" + whatsapp,
           "_blank",
           "noopener,noreferrer"
         );
-      } else if (SITE.phone) {
-        window.location.href = `tel:${SITE.phone}`;
+
       } else {
-        document.querySelector("#contact")?.scrollIntoView({
-          behavior: reduceMotion ? "auto" : "smooth"
-        });
+
+        openModal();
+
       }
+
     });
+
   }
+
+
+  /* ---------- Booking Form Validation ---------- */
+
+  if (bookingForm) {
+
+    const requiredFields = ["name", "phone"];
+
+    requiredFields.forEach((fieldName) => {
+
+      const field = bookingForm.elements[fieldName];
+
+      if (!field) return;
+
+      field.addEventListener("input", () => {
+
+        field.classList.remove("invalid");
+
+      });
+
+    });
+
+
+    bookingForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+        if (!formNote) return;
+
+        formNote.textContent = "";
+
+        formNote.classList.remove("error");
+
+        const formData = Object.fromEntries(
+          new FormData(bookingForm).entries()
+        );
+
+        let valid = true;
+
+        requiredFields.forEach((fieldName) => {
+
+          const field =
+            bookingForm.elements[fieldName];
+
+          if (!field) return;
+
+          const empty =
+            !String(formData[fieldName] || "").trim();
+
+          field.classList.toggle(
+            "invalid",
+            empty
+          );
+
+          if (empty) {
+            valid = false;
+          }
+
+        });
+
+        if (!valid) {
+
+          formNote.classList.add("error");
+
+          formNote.textContent =
+            "لطفاً نام و شماره تماس خود را وارد کنید.";
+
+          return;
+
+        }
+
+
+        const messageLines = [
+
+          "درخواست رزرو مشاوره",
+
+          "نام: " + formData.name,
+
+          "شماره تماس: " + formData.phone,
+
+          "نوع درمان: " + (formData.service || "مشاوره عمومی"),
+
+          formData.date
+            ? "زمان دلخواه: " + formData.date
+            : "",
+
+          formData.message
+            ? "پیام: " + formData.message
+            : ""
+
+        ].filter(Boolean);
+
+        const message = messageLines.join("\n");
+
+        const endpoint =
+          String(SITE.formEndpoint || "").trim();
+
+        const whatsapp =
+          String(SITE.whatsapp || "").replace(/\D/g, "");
+
+        const email =
+          String(SITE.email || "").trim();
+
+
+        try {
+
+          /* Send to configured form service */
+
+          if (endpoint) {
+
+            const submitButton =
+              $('button[type="submit"]', bookingForm);
+
+            if (submitButton) {
+              submitButton.disabled = true;
+            }
+
+            formNote.textContent =
+              "در حال ارسال درخواست...";
+
+            const response = await fetch(endpoint, {
+
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+
+              body: JSON.stringify(formData)
+
+            });
+
+            if (!response.ok) {
+              throw new Error("Request failed");
+            }
+
+            formNote.textContent =
+              "درخواست شما با موفقیت ارسال شد.";
+
+            bookingForm.reset();
+
+            if (submitButton) {
+              submitButton.disabled = false;
+            }
+
+          }
+
+          /* WhatsApp */
+
+          else if (whatsapp) {
+
+            const whatsappURL =
+              "https://wa.me/" +
+              whatsapp +
+              "?text=" +
+              encodeURIComponent(message);
+
+            window.open(
+              whatsappURL,
+              "_blank",
+              "noopener,noreferrer"
+            );
+
+            formNote.textContent =
+              "درخواست شما برای ارسال در واتساپ آماده شد.";
+
+          }
+
+          /* Email */
+
+          else if (email) {
+
+            const mailURL =
+              "mailto:" +
+              email +
+              "?subject=" +
+              encodeURIComponent("درخواست رزرو مشاوره") +
+              "&body=" +
+              encodeURIComponent(message);
+
+            window.location.href = mailURL;
+
+            formNote.textContent =
+              "برنامه ایمیل شما در حال باز شدن است.";
+
+          }
+
+          /* Not configured */
+
+          else {
+
+            formNote.classList.add("error");
+
+            formNote.textContent =
+              "اطلاعات تماس مطب هنوز در فایل config.js تنظیم نشده است.";
+
+          }
+
+        } catch (error) {
+
+          formNote.classList.add("error");
+
+          formNote.textContent =
+            "ارسال درخواست انجام نشد. لطفاً دوباره تلاش کنید.";
+
+          const submitButton =
+            $('button[type="submit"]', bookingForm);
+
+          if (submitButton) {
+            submitButton.disabled = false;
+          }
+
+        }
+
+      }
+
+    );
+
+  }
+
+
+  /* ---------- Search System ---------- */
+
+  const searchBtn = $("#searchBtn");
+
+  const searchPanel = $("#searchPanel");
+
+  const searchInput = $("#searchInput");
+
+  const searchResults = $("#searchResults");
+
+  const searchForm = $("#searchForm");
+
+
+  const searchIndex = [
+
+    {
+      title: "خانه",
+      link: "#home",
+      keywords: "خانه شروع لبخند دندان"
+    },
+
+    {
+      title: "دندان‌پزشکی زیبایی",
+      link: "#treatments",
+      keywords: "زیبایی لمینت کامپوزیت طراحی لبخند"
+    },
+
+    {
+      title: "ایمپلنت دندان",
+      link: "#treatments",
+      keywords: "ایمپلنت کاشت دندان جایگزینی دندان"
+    },
+
+    {
+      title: "سفید کردن دندان",
+      link: "#treatments",
+      keywords: "بلیچینگ سفید کردن زیبایی"
+    },
+
+    {
+      title: "مراقبت‌های پیشگیرانه",
+      link: "#treatments",
+      keywords: "بهداشت دهان جرم گیری مراقبت"
+    },
+
+    {
+      title: "ارتودنسی",
+      link: "#treatments",
+      keywords: "ارتودنسی مرتب کردن دندان"
+    },
+
+    {
+      title: "درمان ریشه",
+      link: "#treatments",
+      keywords: "عصب کشی ریشه دندان"
+    },
+
+    {
+      title: "فناوری و تجهیزات",
+      link: "#technology",
+      keywords: "فناوری اسکن دیجیتال تصویربرداری"
+    },
+
+    {
+      title: "درباره ما",
+      link: "#about",
+      keywords: "درباره کلینیک تجربه مراقبت"
+    },
+
+    {
+      title: "تماس و رزرو مشاوره",
+      link: "#contact",
+      keywords: "تماس تلفن آدرس رزرو نوبت"
+    }
+
+  ];
+
+
+  const renderSearchResults = (query = "") => {
+
+    if (!searchResults) return;
+
+    const term = query.trim().toLowerCase();
+
+    const results = term
+
+      ? searchIndex.filter((item) => {
+
+          const searchable =
+            item.title + " " + item.keywords;
+
+          return searchable
+            .toLowerCase()
+            .includes(term);
+
+        })
+
+      : searchIndex.slice(1, 6);
+
+
+    searchResults.innerHTML = "";
+
+
+    if (!results.length) {
+
+      const empty = document.createElement("li");
+
+      empty.className = "search-empty";
+
+      empty.textContent =
+        "نتیجه‌ای پیدا نشد. عبارت دیگری را جست‌وجو کنید.";
+
+      searchResults.appendChild(empty);
+
+      return;
+
+    }
+
+
+    results.forEach((item) => {
+
+      const li = document.createElement("li");
+
+      const link = document.createElement("a");
+
+      link.href = item.link;
+
+      const title = document.createElement("span");
+
+      title.textContent = item.title;
+
+      const subtitle = document.createElement("small");
+
+      subtitle.textContent =
+        item.link.replace("#", "");
+
+      link.appendChild(title);
+
+      link.appendChild(subtitle);
+
+      link.addEventListener("click", () => {
+        toggleSearch(false);
+      });
+
+      li.appendChild(link);
+
+      searchResults.appendChild(li);
+
+    });
+
+  };
+
+
+  const toggleSearch = (open) => {
+
+    if (!searchPanel || !searchBtn) return;
+
+    searchPanel.hidden = !open;
+
+    searchPanel.classList.toggle(
+      "open",
+      open
+    );
+
+    searchBtn.setAttribute(
+      "aria-expanded",
+      String(open)
+    );
+
+    if (open) {
+
+      if (searchInput) {
+
+        searchInput.value = "";
+
+        renderSearchResults("");
+
+        setTimeout(() => {
+          searchInput.focus();
+        }, 30);
+
+      }
+
+    }
+
+  };
+
+
+  if (searchBtn && searchPanel) {
+
+    searchBtn.addEventListener("click", () => {
+
+      toggleSearch(searchPanel.hidden);
+
+    });
+
+  }
+
+
+  if (searchInput) {
+
+    searchInput.addEventListener("input", () => {
+
+      renderSearchResults(searchInput.value);
+
+    });
+
+  }
+
+
+  if (searchForm) {
+
+    searchForm.addEventListener("submit", (event) => {
+
+      event.preventDefault();
+
+      const firstResult =
+        $("a", searchResults);
+
+      if (firstResult) {
+        firstResult.click();
+      }
+
+    });
+
+  }
+
+
+  /* ---------- Keyboard Shortcuts ---------- */
+
+  document.addEventListener("keydown", (event) => {
+
+    if (event.key !== "Escape") return;
+
+    if (modal && !modal.hidden) {
+
+      closeModal();
+
+    } else if (
+      searchPanel &&
+      !searchPanel.hidden
+    ) {
+
+      toggleSearch(false);
+
+      if (searchBtn) {
+        searchBtn.focus();
+      }
+
+    } else if (
+      nav &&
+      nav.classList.contains("open")
+    ) {
+
+      setMenu(false);
+
+    }
+
+  });
+
+
+  /* ---------- Initialization ---------- */
+
+  console.log(
+    "%c PURE DENTAL ",
+    "background:#17191d;color:#c5a47e;padding:8px 14px;font-weight:bold;"
+  );
+
+  console.log(
+    "Website initialized successfully."
+  );
 
 })();
